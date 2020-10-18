@@ -4,8 +4,11 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <ctype.h>
 
 #define size 15
+#define numwords 20
 
 void display(char [][size]);
-void get_input(char [][size]);
+int get_input(char [][size]);
+int format_word(char *);

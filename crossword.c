@@ -6,19 +6,21 @@
 
 int main(int argc, char *argv[]) {
 	// initial begin
-	int numwords = 20, errorCode;
+	int errorCode;
 	char words[numwords][size]; // 20 words, 15 chars + null character
-	char board[size][size]; // 15 by fifteen?? must make display function
+	char solution_board[size][size]; // 15 by fifteen?? must make display function
+	char puzzle_board[size][size];
 	// and stuff to check . will prob need more
 	int i,j;
 	for (i = 0; i < size; i++) {
 		for (j = 0; j < size; j++) {
-			board[i][j] = '.';
+			solution_board[i][j] = '.';
+			puzzle_board[i][j] = '#';
 		}
 	}
 
 	if (argc == 1) { // get user input
-		display(board);	
+		display(solution_board);	
 	}
 	else if (argc == 2) {
 		errCode = get_input(board);
