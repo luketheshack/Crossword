@@ -17,7 +17,7 @@ void display(char board[][SIZE]) {
 	printf("\nX-------------------------------X\n\n");
 }
 
-int get_input(char words[][SIZE+2]) {
+int get_input(char words[][SIZE]) {
 	FILE *fp;
 	char *fn = malloc(25*sizeof(char));
 	int returnCode = 0;
@@ -30,14 +30,14 @@ int get_input(char words[][SIZE+2]) {
 		returnCode++;
 		return returnCode;
 	}
-	char line[SIZE+2];
+	char line[SIZE];
 	int ct = 0;
 	while (1) {
 		if (ct >= numwords) {
 			printf("Too many words inputted. Stopping input retrieval...\n");
 			return returnCode;
 		}
-		fgets(line, SIZE+2, fp);
+		fgets(line, SIZE, fp);
 		if (feof(fp)) break;
 		if (line[0] == '.') break;
 		int code = format_word(line);
@@ -53,16 +53,16 @@ int get_input(char words[][SIZE+2]) {
 int format_word(char word[]) {
 	int returnCode = 0;
 	int c;
-	if (strlen(word) < 3 || strlen(word) > 17) {
+	if (strlen(word) < 2 || strlen(word) > SIZE) {
 		printf("Word does not meet length criteria.\n");
 		returnCode = 1;
 		return returnCode;
 	}
-	for (c = 0; c < strlen(word)-1; c++) {
+	for (c = 0; c < strlen(word); c++) {
 		if (!isalpha(word[c])) {
 			printf("Non-alphabetic character detected. Selected word cannot be added.\n", word);
 			returnCode = 1;
-			return returnCode;
+			break;
 		}
 		else {
 			word[c] = toupper(word[c]);
@@ -71,27 +71,31 @@ int format_word(char word[]) {
 	return returnCode;
 }
 
-void interactive_input(char words[][SIZE+2], int *count) {
-	char line[SIZE+2];
+void interactive_input(char words[][SIZE], int *count) {
+	char line[SIZE];
 	int ct = 0;
 	int code;
 	do {
 		printf("Enter a word: \n");
-		fgets(line, SIZE+2, stdin);
+		scanf("%s", line);
+		getchar();
 		if (line[0] == '.') break;
 		code = format_word(line);
 		if (code == 0) {
-			strcpy(words[ct], line);
-			ct++;
+			//printf("%d  ", code);
+			if (strlen(line) < SIZE) {
+				strcpy(words[ct], line);
+				ct++;
+			}
 		}
 	}
 	while (ct <= 20 && line[0] != '.');
 	*count = ct;
 }
 
-void sortwords(char words[][SIZE+2], int count) {
+void sortwords(char words[][SIZE], int count) {
 	int i, j;
-	char temp[SIZE+2];
+	char temp[SIZE];
 	for (j = 0; j < count; j++) {
 		for (i = 0; i < count-1; i++) {
 			if (strlen(words[i]) < strlen(words[i+1])) {
@@ -103,4 +107,14 @@ void sortwords(char words[][SIZE+2], int count) {
 	}
 
 	return;
+}
+
+void makeclues(char words[][SIZE], char clues[][SIZE], int count) {
+	int i;
+	char wrd[SIZE];
+	for (i = 0; i < count; i++) {
+		strcpy(wrd, words[i]);
+		strfry(wrd);
+		strcpy(clues[i], wrd);
+	}
 }

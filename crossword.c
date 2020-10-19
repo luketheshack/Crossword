@@ -7,8 +7,8 @@
 int main(int argc, char *argv[]) {
 	// initial begin
 	int errorCode;
-	char words[numwords][SIZE+2]; // 20 words, 15 chars apiece
-	char clues[numwords][SIZE+2];
+	char words[numwords][SIZE]; // 20 words, 15 chars apiece
+	char clues[numwords][SIZE];
 	char solution_board[SIZE][SIZE]; // 15 by fifteen?? must make display function
 	char puzzle_board[SIZE][SIZE];
 	// and stuff to check . will prob need more
@@ -26,8 +26,11 @@ int main(int argc, char *argv[]) {
 		interactive_input(words, &count);
 		int i;
 		sortwords(words, count);
+		// note: all of the words currently contain the \n making them one
+		// character long than should, plus null character at end
+		makeclues(words, clues, count);
 		for (i = 0; i < count; i++) {
-			printf("%s\n", words[i]);
+			printf("%s\n", clues[i]);
 		}
 	}
 
