@@ -9,6 +9,7 @@
 #define numwords 20
 
 void display(char [][SIZE]);
-int get_input(char [][SIZE]);
-void interactive_input(char [][SIZE]);
+int get_input(char [][SIZE+2]);
+void interactive_input(char [][SIZE+2], int *count);
 int format_word(char []);
+void sortwords(char [][SIZE+2], int count);
