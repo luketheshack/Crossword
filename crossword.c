@@ -7,29 +7,32 @@
 int main(int argc, char *argv[]) {
 	// initial begin
 	int errorCode;
-	char words[numwords][size]; // 20 words, 15 chars + null character
-	char solution_board[size][size]; // 15 by fifteen?? must make display function
-	char puzzle_board[size][size];
+	char words[numwords][SIZE]; // 20 words, 15 chars apiece
+	char clues[numwords][SIZE];
+	char solution_board[SIZE][SIZE]; // 15 by fifteen?? must make display function
+	char puzzle_board[SIZE][SIZE];
 	// and stuff to check . will prob need more
 	int i,j;
-	for (i = 0; i < size; i++) {
-		for (j = 0; j < size; j++) {
+	for (i = 0; i < SIZE; i++) {
+		for (j = 0; j < SIZE; j++) {
 			solution_board[i][j] = '.';
 			puzzle_board[i][j] = '#';
 		}
 	}
 
 	if (argc == 1) { // get user input
-		display(solution_board);	
+		display(solution_board);
+		interactive_input(words);
+			
 	}
 	else if (argc == 2) {
-		errCode = get_input(board);
-		if (errCode != 0) return 1;
+		errorCode = get_input(words);
+		if (errorCode != 0) return 1;
 
 	}
 	else if (argc == 3) {
-		errCode = get_input(board);
-		if (errCode != 0) return 1;
+		errorCode = get_input(words);
+		if (errorCode != 0) return 1;
 	}
 
 	else {

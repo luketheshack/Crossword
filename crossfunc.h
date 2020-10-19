@@ -5,10 +5,10 @@
 #include <string.h>
 #include <stdlib.h>
 #include <ctype.h>
-
-#define size 15
+#define SIZE 15
 #define numwords 20
 
-void display(char [][size]);
-int get_input(char [][size]);
-int format_word(char *);
+void display(char [][SIZE]);
+int get_input(char [][SIZE]);
+void interactive_input(char [][SIZE]);
+int format_word(char []);
