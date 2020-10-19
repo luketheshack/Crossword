@@ -101,5 +101,6 @@ void sortwords(char words[][SIZE+2], int count) {
 			}
 		}
 	}
+
 	return;
 }
