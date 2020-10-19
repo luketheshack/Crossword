@@ -26,8 +26,6 @@ int main(int argc, char *argv[]) {
 		interactive_input(words, &count);
 		int i;
 		sortwords(words, count);
-		// note: all of the words currently contain the \n making them one
-		// character long than should, plus null character at end
 		makeclues(words, clues, count);
 		for (i = 0; i < count; i++) {
 			printf("%s\n", clues[i]);

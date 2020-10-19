@@ -49,7 +49,7 @@ int get_input(char words[][SIZE]) {
 	return returnCode;
 	
 }
-
+// 15 char problem somewhere
 int format_word(char word[]) {
 	int returnCode = 0;
 	int c;
