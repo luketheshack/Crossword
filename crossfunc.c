@@ -152,29 +152,39 @@ void placewords(char words[][SIZE], char solution_board[][SIZE], char puzzle_boa
 	int j,k,l;
 	bool found;
 
-	for (i = 0; i < array_index; i++) {
-		found = false;
-		for (j = 0; j < strlen(words[1]); j++) { // letter in specific word we want to place      // 1
-			for (k = 0; k < dataArray[i].len; k++) { // letter in word its getting crossed with   // 0
-				if (words[1][j] == (dataArray[i].word)[k]) {
-					// place word
-					found = true;
-					for (l = 0; l < strlen(words[1]); l++) {
-						wordcol = dataArray[i].col+k;
-						wordrow = dataArray[i].row-j;	
-						solution_board[wordrow+l][wordcol] = words[1][l]; // row vary, column stationary
-							
-					}
-					// update data array
-					break;
+	found = false;
+	for (j = 0; j < strlen(words[1]); j++) { // letter in specific word we want to place
+		for (k = 0; k < dataArray[1].len; k++) { // letter in word its getting crossed with 
+			if (words[1][j] == (dataArray[1].word)[k]) {
+				// place word
+				found = true;
+				for (l = 0; l < strlen(words[1]); l++) {
+					wordcol = dataArray[i].col+k;
+					wordrow = dataArray[i].row-j;	
+					solution_board[wordrow+l][wordcol] = words[1][l];
+						
 				}
+				// update data array
+				strcpy(dataArray[array_index].word, words[1]);
+				dataArray[array_index].len = strlen(words[1]);
+				dataArray[array_index].row = wordrow;
+				dataArray[array_index].col = wordcol;
+				dataArray[array_index].dir = 'A';
+				array_index++;
+				break;
 			}
-			if (found) break;
 		}
-		if (!found) {
-			printf("Unable to place word.\n");
-		}
+		if (found) break;
 	}
+	if (!found) {
+		printf("Unable to place word.\n");
+	}
+
+	 /* additional constraints:
+	 * start of word, end of word is on board. 
+	 * cell is a ' '
+	 * surrounding squares empty
+	*/
 	// for each word in dataArray:
 		// for each letter in spcific word
 			// for each letter in word in array
