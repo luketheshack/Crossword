@@ -160,8 +160,9 @@ void placewords(char words[][SIZE], char solution_board[][SIZE], char puzzle_boa
 					// place word
 					found = true;
 					for (l = 0; l < strlen(words[1]); l++) {
-						
-						solution_board[dataArray[i].row+k-j+l][dataArray[i].row+j-k] = words[1][l]; // row vary, column stationary
+						wordcol = dataArray[i].col+k;
+						wordrow = dataArray[i].row-j;	
+						solution_board[wordrow+l][wordcol] = words[1][l]; // row vary, column stationary
 							
 					}
 					// update data array
