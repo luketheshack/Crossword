@@ -27,9 +27,8 @@ int main(int argc, char *argv[]) {
 		int i;
 		sortwords(words, count);
 		makeclues(words, clues, count);
-		for (i = 0; i < count; i++) {
-			printf("%s\n", clues[i]);
-		}
+		placewords(words, solution_board, puzzle_board, count);
+		display(solution_board);
 	}
 
 	else if (argc == 2) {

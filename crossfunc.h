@@ -5,6 +5,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <ctype.h>
+#include <stdbool.h>
 #define SIZE 15
 #define numwords 20
 
@@ -13,4 +14,5 @@ int get_input(char [][SIZE]); //
 void interactive_input(char [][SIZE], int *count); // 
 int format_word(char []);
 void sortwords(char [][SIZE], int count); // 
-void makeclues(char [][SIZE], char [][SIZE], int count); // 
+void makeclues(char [][SIZE], char [][SIZE], int count); //
+void placewords(char [][SIZE], char [][SIZE], char [][SIZE], int);

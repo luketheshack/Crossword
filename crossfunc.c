@@ -118,3 +118,65 @@ void makeclues(char words[][SIZE], char clues[][SIZE], int count) {
 		strcpy(clues[i], wrd);
 	}
 }
+
+typedef struct {
+	char word[15]; // word itself
+	char len; // length of word
+	char row; // row where it starts
+	char col; // col where it starts
+	char dir; // direction --> d (down) or a (across)
+} WordData;
+
+void placewords(char words[][SIZE], char solution_board[][SIZE], char puzzle_board[][SIZE], int count) {
+	int i = 0, wordrow, wordcol, array_index = 0;
+	WordData dataArray[count];
+	// DO FIRST WORD
+	if (i >= count) return;
+	wordrow = SIZE/2;
+	wordcol = (SIZE - strlen(words[0]))/2;
+	for (i = 0; i < strlen(words[0]); i++) {
+		solution_board[wordrow][wordcol+i] = words[0][i];
+		puzzle_board[wordrow][wordcol+i] = words[0][i];
+	}	
+	i++;
+	
+	strcpy(dataArray[array_index].word, words[0]);
+	dataArray[array_index].len = strlen(words[0]);
+	dataArray[array_index].row = wordrow;
+	dataArray[array_index].col = wordcol;
+	dataArray[array_index].dir = 'D';
+	array_index++;
+	
+	// DO SECOND WORD
+	if (i < count) return;
+	int j,k,l;
+	bool found;
+
+	for (i = 0; i < array_index; i++) {
+		found = false;
+		for (j = 0; j < strlen(words[1]); j++) { // letter in specific word we want to place      // 1
+			for (k = 0; k < dataArray[i].len; k++) { // letter in word its getting crossed with   // 0
+				if (words[1][j] == (dataArray[i].word)[k]) {
+					// place word
+					found = true;
+					for (l = 0; l < strlen(words[1]); l++) {
+						
+						solution_board[dataArray[i].row+k-j+l][dataArray[i].row+j-k] = words[1][l]; // row vary, column stationary
+							
+					}
+					// update data array
+					break;
+				}
+			}
+			if (found) break;
+		}
+		if (!found) {
+			printf("Unable to place word.\n");
+		}
+	}
+	// for each word in dataArray:
+		// for each letter in spcific word
+			// for each letter in word in array
+
+	
+} 
