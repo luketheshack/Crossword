@@ -136,7 +136,7 @@ void placewords(char words[][SIZE], char solution_board[][SIZE], char puzzle_boa
 	wordcol = (SIZE - strlen(words[0]))/2;
 	for (i = 0; i < strlen(words[0]); i++) {
 		solution_board[wordrow][wordcol+i] = words[0][i];
-		puzzle_board[wordrow][wordcol+i] = words[0][i];
+		puzzle_board[wordrow][wordcol+i] = ' ';
 	}	
 	i++;
 	
@@ -164,7 +164,7 @@ void placewords(char words[][SIZE], char solution_board[][SIZE], char puzzle_boa
 
 				for (l = 0; l < strlen(words[1]); l++) {
 					solution_board[wordrow+l][wordcol] = words[1][l];
-					puzzle_board[wordrow+l][wordcol] = words[1][l];
+					puzzle_board[wordrow+l][wordcol] = ' ';
 				}
 				// update data array
 				strcpy(dataArray[array_index].word, words[1]);
@@ -202,12 +202,25 @@ void placewords(char words[][SIZE], char solution_board[][SIZE], char puzzle_boa
 									break;	
 								}	
 							} 
+							if (wordrow+m <= SIZE && solution_board[wordrow+m][wordcol] != '.') badcond = true; 
 							if (badcond) break;
 							// if we make it here, then word will fit nicely on board
-
+							for (m = 0; m < strlen(words[i]); m++) {
+								solution_board[wordrow+m][wordcol] = words[i][l];
+								
+							}
+							// make function to update the dataarray
 						}
-						if (dataArray[j].dir == 'D') // new word must go across
-							
+						if (dataArray[j].dir == 'D') {// new word must go across
+							for (m = 0; m < strlen(words[i]); m++) {
+								if ( (wordcol+m < 0) || (wordcol+m >= SIZE) || solution_board[wordrow][wordcol+m] != '.' || solution_board[wordrow+1][wordcol+m] != '.' || solution_board[wordrow-1][wordcol+m] != '.') {
+									badcond = false;
+									break;
+								}	
+							}
+							// 205	
+							if (badcond) break;
+						}
 						// check if start and end of word are on board.
 						// check if each cell is empty and surrounding squares are empty
 
