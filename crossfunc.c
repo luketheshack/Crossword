@@ -149,8 +149,9 @@ void placewords(char words[][SIZE], char solution_board[][SIZE], char puzzle_boa
 	
 	// DO SECOND WORD
 	if (i < count) return;
-	int j,k,l;
+	int j,k,l,m;
 	bool found;
+	char method;
 
 	found = false;
 	for (j = 0; j < strlen(words[1]); j++) { // letter in specific word we want to place
@@ -188,9 +189,24 @@ void placewords(char words[][SIZE], char solution_board[][SIZE], char puzzle_boa
 
 				for (l = 0; l < dataArray[j].len; l++) {
 					
+					if (words[i][k] == (dataArray[j].word)[l]) {
+						// check method: across and down
+						if (dataArray[j].dir == 'A') // new word must go down
 
-				}
-				
+						if (dataArray[j].dir == 'D') // new word must go across
+
+
+						// check if start and end of word are on board.
+						// check if each cell is empty and surrounding squares are empty
+						wordrow = dataArray[j].row - k;
+						wordcol = dataArray[j].col + ;
+
+						for (m = 0; m < strlen(words[i]); m++) {
+							if 
+						}
+
+					}
+				}	
 			}
 		}
 	}
