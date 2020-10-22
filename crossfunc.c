@@ -180,6 +180,20 @@ void placewords(char words[][SIZE], char solution_board[][SIZE], char puzzle_boa
 		printf("Unable to place word.\n");
 	}
 
+	for (i = 2; i < count; i++) { // for each word in word array
+		found = false;
+		for (j = 0; j < array_index; j++) { // for each already placed word
+
+			for (k = 0; k < strlen(words[i]); k++) { // for each letter in word to be placed
+
+				for (l = 0; l < dataArray[j].len; l++) {
+					
+
+				}
+				
+			}
+		}
+	}
 	 /* additional constraints:
 	 * start of word, end of word is on board. 
 	 * cell is a ' '
