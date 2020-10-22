@@ -159,11 +159,12 @@ void placewords(char words[][SIZE], char solution_board[][SIZE], char puzzle_boa
 			if (words[1][j] == (dataArray[1].word)[k]) {
 				// place word
 				found = true;
+				wordcol = dataArray[i].col+k;
+				wordrow = dataArray[i].row-j;	
+
 				for (l = 0; l < strlen(words[1]); l++) {
-					wordcol = dataArray[i].col+k;
-					wordrow = dataArray[i].row-j;	
 					solution_board[wordrow+l][wordcol] = words[1][l];
-						
+					puzzle_board[wordrow+l][wordcol] = words[1][l];
 				}
 				// update data array
 				strcpy(dataArray[array_index].word, words[1]);
@@ -191,19 +192,18 @@ void placewords(char words[][SIZE], char solution_board[][SIZE], char puzzle_boa
 					
 					if (words[i][k] == (dataArray[j].word)[l]) {
 						// check method: across and down
-						if (dataArray[j].dir == 'A') // new word must go down
-
+						wordrow = dataArray[j].row - k;
+						wordcol = dataArray[j].col + l;
+						
+						if (dataArray[j].dir == 'A') {// new word must go down
+							for (m = 0; m < strlen(words[i]); m++) {
+								if (solution_board[wordrow+m][wordcol] != 	
+							} 
+						}
 						if (dataArray[j].dir == 'D') // new word must go across
-
-
+							
 						// check if start and end of word are on board.
 						// check if each cell is empty and surrounding squares are empty
-						wordrow = dataArray[j].row - k;
-						wordcol = dataArray[j].col + ;
-
-						for (m = 0; m < strlen(words[i]); m++) {
-							if 
-						}
 
 					}
 				}	
