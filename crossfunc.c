@@ -194,11 +194,17 @@ void placewords(char words[][SIZE], char solution_board[][SIZE], char puzzle_boa
 						// check method: across and down
 						wordrow = dataArray[j].row - k;
 						wordcol = dataArray[j].col + l;
-						
+						bool badcond = false;
 						if (dataArray[j].dir == 'A') {// new word must go down
 							for (m = 0; m < strlen(words[i]); m++) {
-								if (solution_board[wordrow+m][wordcol] != 	
+								if ((wordrow+m < 0) || (wordrow+m >= SIZE) || solution_board[wordrow+m][wordcol] != '.' || solution_board[wordrow+m][wordcol-1] != '.' || solution_board[wordrow+m][wordcol+1] != '.') {
+									badcond = true;
+									break;	
+								}	
 							} 
+							if (badcond) break;
+							// if we make it here, then word will fit nicely on board
+
 						}
 						if (dataArray[j].dir == 'D') // new word must go across
 							
