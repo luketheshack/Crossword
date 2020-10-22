@@ -124,7 +124,7 @@ void update(WordData dataArray[], char words[][SIZE], int wordindex, int wordrow
 	dataArray[*array_index].len = strlen(words[wordindex]);
 	dataArray[*array_index].row = wordrow;
 	dataArray[*array_index].col = wordcol;
-	dataArray[*array_index].dir = direction
+	dataArray[*array_index].dir = direction;
 	(*array_index)++;
 }
 
@@ -140,15 +140,7 @@ void placewords(WordData dataArray[], char words[][SIZE], char solution_board[][
 	}	
 	i++;
 	
-	update(dataArray, words, 0, wordrow, wordcol, 'A', &array_index);
-	/*	
-	strcpy(dataArray[array_index].word, words[0]);
-	dataArray[array_index].len = strlen(words[0]);
-	dataArray[array_index].row = wordrow;
-	dataArray[array_index].col = wordcol;
-	dataArray[array_index].dir = 'A';
-	array_index++;
-	*/
+	update(dataArray, words, 0, wordrow, wordcol, 'A', &array_index); // change to 'A'
 	
 	// DO SECOND WORD
 	if (i < count) return;
@@ -158,13 +150,13 @@ void placewords(WordData dataArray[], char words[][SIZE], char solution_board[][
 
 	found = false;
 	for (j = 0; j < strlen(words[1]); j++) { // letter in specific word we want to place
-		for (k = 0; k < dataArray[1].len; k++) { // letter in word its getting crossed with 
-			if (words[1][j] == (dataArray[1].word)[k]) {
+		for (k = 0; k < dataArray[0].len; k++) { // letter in word its getting crossed with 
+			if (words[1][j] == (dataArray[0].word)[k]) {
 				// place word
 				found = true;
-				wordcol = dataArray[i].col+k;
-				wordrow = dataArray[i].row-j;	
-
+				wordcol = dataArray[0].col+k;
+				wordrow = dataArray[0].row-j;
+				
 				for (l = 0; l < strlen(words[1]); l++) {
 					solution_board[wordrow+l][wordcol] = words[1][l];
 					puzzle_board[wordrow+l][wordcol] = ' ';
@@ -208,7 +200,7 @@ void placewords(WordData dataArray[], char words[][SIZE], char solution_board[][
 								puzzle_board[wordrow][wordcol+m] = ' ';
 							}
 							found = true;
-							update(dataArray, words, i, wordrow, wordcount, 'D', &array_index);
+							update(dataArray, words, i, wordrow, wordcol, 'D', &array_index);
 						}
 						if (dataArray[j].dir == 'D') {// new word must go across
 							for (m = 0; m < strlen(words[i]); m++) {
@@ -225,7 +217,7 @@ void placewords(WordData dataArray[], char words[][SIZE], char solution_board[][
 								puzzle_board[wordrow][wordcol+m] = ' ';
 							}
 							found = true;
-							update(dataArray, words, i, wordrow, wordcount, 'A', &array_index);
+							update(dataArray, words, i, wordrow, wordcol, 'A', &array_index);
 						}
 						if (found) break;
 					}
