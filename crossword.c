@@ -24,10 +24,11 @@ int main(int argc, char *argv[]) {
 	if (argc == 1) { // get user input
 		display(solution_board);
 		interactive_input(words, &count);
+		WordData dataArray[count];
 		int i;
 		sortwords(words, count);
 		makeclues(words, clues, count);
-		placewords(words, solution_board, puzzle_board, count);
+		placewords(dataArray, words, solution_board, puzzle_board, count);
 		display(solution_board);
 	}
 

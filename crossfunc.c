@@ -119,17 +119,8 @@ void makeclues(char words[][SIZE], char clues[][SIZE], int count) {
 	}
 }
 
-typedef struct {
-	char word[15]; // word itself
-	char len; // length of word
-	char row; // row where it starts
-	char col; // col where it starts
-	char dir; // direction --> d (down) or a (across)
-} WordData;
-
-void placewords(char words[][SIZE], char solution_board[][SIZE], char puzzle_board[][SIZE], int count) {
+void placewords(WordData dataArray[], char words[][SIZE], char solution_board[][SIZE], char puzzle_board[][SIZE], int count) {
 	int i = 0, wordrow, wordcol, array_index = 0;
-	WordData dataArray[count];
 	// DO FIRST WORD
 	if (i >= count) return;
 	wordrow = SIZE/2;
@@ -181,7 +172,7 @@ void placewords(char words[][SIZE], char solution_board[][SIZE], char puzzle_boa
 	if (!found) {
 		printf("Unable to place word.\n");
 	}
-
+	// DO REST OF WORDS
 	for (i = 2; i < count; i++) { // for each word in word array
 		found = false;
 		for (j = 0; j < array_index; j++) { // for each already placed word
@@ -209,6 +200,7 @@ void placewords(char words[][SIZE], char solution_board[][SIZE], char puzzle_boa
 								solution_board[wordrow+m][wordcol] = words[i][l];
 								puzzle_board[wordrow][wordcol+m] = ' ';
 							}
+							found = true;
 							// make function to update the dataarray
 						}
 						if (dataArray[j].dir == 'D') {// new word must go across
@@ -225,12 +217,16 @@ void placewords(char words[][SIZE], char solution_board[][SIZE], char puzzle_boa
 								solution_board[wordrow][wordcol+m] = words[i][l];
 								puzzle_board[wordrow][wordcol+m] = ' ';
 							}
+							found = true;
 							// make function to update array
 						}
-						// make found variable to exit parts of loop if word is placed
+						if (found) break;
 					}
-				}	
+					if (found) break;
+				}
+				if (found) break;	
 			}
+			if (found) break;
 		}
 	}
 	 /* additional constraints:
