@@ -207,23 +207,27 @@ void placewords(char words[][SIZE], char solution_board[][SIZE], char puzzle_boa
 							// if we make it here, then word will fit nicely on board
 							for (m = 0; m < strlen(words[i]); m++) {
 								solution_board[wordrow+m][wordcol] = words[i][l];
-								
+								puzzle_board[wordrow][wordcol+m] = ' ';
 							}
 							// make function to update the dataarray
 						}
 						if (dataArray[j].dir == 'D') {// new word must go across
 							for (m = 0; m < strlen(words[i]); m++) {
 								if ( (wordcol+m < 0) || (wordcol+m >= SIZE) || solution_board[wordrow][wordcol+m] != '.' || solution_board[wordrow+1][wordcol+m] != '.' || solution_board[wordrow-1][wordcol+m] != '.') {
-									badcond = false;
+									badcond = true;
 									break;
 								}	
 							}
-							// 205	
+							if (wordcol+m <= SIZE && solution_board[wordrow][wordcol+m] != '.') badcond = true;
 							if (badcond) break;
+							// if we make it here, word fits on board
+							for (m = 0; m < strlen(words[i]); m++) {
+								solution_board[wordrow][wordcol+m] = words[i][l];
+								puzzle_board[wordrow][wordcol+m] = ' ';
+							}
+							// make function to update array
 						}
-						// check if start and end of word are on board.
-						// check if each cell is empty and surrounding squares are empty
-
+						// make found variable to exit parts of loop if word is placed
 					}
 				}	
 			}
