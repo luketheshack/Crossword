@@ -181,15 +181,20 @@ void placewords(WordData dataArray[], char words[][SIZE], char solution_board[][
 					
 					if (words[i][k] == (dataArray[j].word)[l]) {
 						// check method: across and down
+						int exceptions = 0; // for when checking if word can fit, do not include 
 						bool badcond = false;
 						if (dataArray[j].dir == 'A') {// new word must go down
 							wordrow = dataArray[j].row - k;
 							wordcol = dataArray[j].col + l;
-							for (m = 1; m < strlen(words[i]); m++) { // should be zero start
+							for (m = 0; m < strlen(words[i]); m++) { // should be zero start
 								// how to make it so they get one exception
-								if ((wordrow+m < 0) || (wordrow+m >= SIZE) || solution_board[wordrow+m][wordcol] != '.' || solution_board[wordrow+m][wordcol-1] != '.' || solution_board[wordrow+m][wordcol+1] != '.') {
-									badcond = true;
-									break;	
+								if ( (wordrow+m < 0) || (wordrow+m >= SIZE) || solution_board[wordrow+m][wordcol] != '.' || solution_board[wordrow+m][wordcol-1] != '.' || solution_board[wordrow+m][wordcol+1] != '.') {
+									if (exceptions == 0 && (wordrow + m >= 0 && wordrow + m < SIZE)) {
+										exceptions++;
+									} else {
+										badcond = true;
+										break;	
+									}	
 								}	
 							} 
 							if (wordrow+m <= SIZE && solution_board[wordrow+m][wordcol] != '.') badcond = true; 
@@ -203,20 +208,23 @@ void placewords(WordData dataArray[], char words[][SIZE], char solution_board[][
 							update(dataArray, words, i, wordrow, wordcol, 'D', &array_index);
 						}
 						if (dataArray[j].dir == 'D') {// new word must go across
-							//printf("%d %d\n", dataArray[j].row, k);
-							wordrow = dataArray[j].row - k;
-							wordcol = dataArray[j].col + l;
-							for (m = 1; m < strlen(words[i]); m++) { // should be zero start
+							wordrow = dataArray[j].row + l;
+							wordcol = dataArray[j].col - k;
+							for (m = 0; m < strlen(words[i]); m++) { // should be zero start
 								// how to make it so that they get one exception?
 								if ( (wordcol+m < 0) || (wordcol+m >= SIZE) || solution_board[wordrow][wordcol+m] != '.' || solution_board[wordrow+1][wordcol+m] != '.' || solution_board[wordrow-1][wordcol+m] != '.') {
-									badcond = true;
-									break;
+									
+									if (exceptions == 0 && (wordrow + m >= 0 && wordrow + m < SIZE)) {
+										exceptions++;
+									} else {
+										badcond = true;
+										break;
+									}
 								}	
 							}
 							if (wordcol+m <= SIZE && solution_board[wordrow][wordcol+m] != '.') badcond = true;
 							if (badcond) break;
 							// if we make it here, word fits on board
-							printf("%d\n", wordrow);
 							for (m = 0; m < strlen(words[i]); m++) {
 								solution_board[wordrow][wordcol+m] = words[i][m];
 								puzzle_board[wordrow][wordcol+m] = ' ';
