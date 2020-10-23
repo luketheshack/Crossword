@@ -214,7 +214,7 @@ void placewords(WordData dataArray[], char words[][SIZE], char solution_board[][
 								// how to make it so that they get one exception?
 								if ( (wordcol+m < 0) || (wordcol+m >= SIZE) || solution_board[wordrow][wordcol+m] != '.' || solution_board[wordrow+1][wordcol+m] != '.' || solution_board[wordrow-1][wordcol+m] != '.') {
 									
-									if (exceptions == 0 && (wordrow + m >= 0 && wordrow + m < SIZE)) {
+									if (exceptions == 0 && (wordcol + m >= 0 && wordcol + m < SIZE)) {
 										exceptions++;
 									} else {
 										badcond = true;
