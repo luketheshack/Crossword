@@ -174,7 +174,6 @@ void placewords(WordData dataArray[], char words[][SIZE], char solution_board[][
 	// DO REST OF WORDS
 	for (i = 2; i < count; i++) { // for each word in word array
 		found = false;
-		printf("%s:\n ", words[i]); 
 		for (j = 0; j < array_index; j++) { // for each already placed word
 			for (k = 0; k < strlen(words[i]); k++) { // for each letter in word to be placed
 
@@ -185,6 +184,8 @@ void placewords(WordData dataArray[], char words[][SIZE], char solution_board[][
 						int exceptions = 0; // for when checking if word can fit, do not include 
 						bool badcond = false;
 						if (dataArray[j].dir == 'A') {// new word must go down
+
+							//
 							wordrow = dataArray[j].row - k;
 							wordcol = dataArray[j].col + l;
 							for (m = 0; m < strlen(words[i]); m++) { // should be zero start
@@ -200,16 +201,18 @@ void placewords(WordData dataArray[], char words[][SIZE], char solution_board[][
 							} 
 							if (wordrow+m <= SIZE && solution_board[wordrow+m][wordcol] != '.') badcond = true; 
 							if (badcond) break;
+
 							// if we make it here, then word will fit nicely on board
 							for (m = 0; m < strlen(words[i]); m++) {
-								printf("%c %d %d", words[i][m], wordrow+m, wordcol);
 								solution_board[wordrow+m][wordcol] = words[i][m];
 								puzzle_board[wordrow+m][wordcol] = ' ';
 							}
 							found = true;
 							update(dataArray, words, i, wordrow, wordcol, 'D', &array_index);
+
 						}
 						if (dataArray[j].dir == 'D') {// new word must go across
+							
 							wordrow = dataArray[j].row + l;
 							wordcol = dataArray[j].col - k;
 							for (m = 0; m < strlen(words[i]); m++) { // should be zero start
@@ -226,6 +229,7 @@ void placewords(WordData dataArray[], char words[][SIZE], char solution_board[][
 							}
 							if (wordcol+m <= SIZE && solution_board[wordrow][wordcol+m] != '.') badcond = true;
 							if (badcond) break;
+
 							// if we make it here, word fits on board
 							for (m = 0; m < strlen(words[i]); m++) {
 								solution_board[wordrow][wordcol+m] = words[i][m];
@@ -233,6 +237,7 @@ void placewords(WordData dataArray[], char words[][SIZE], char solution_board[][
 							}
 							found = true;
 							update(dataArray, words, i, wordrow, wordcol, 'A', &array_index);
+
 						}
 						if (found) break;
 					}
