@@ -175,19 +175,18 @@ void placewords(WordData dataArray[], char words[][SIZE], char solution_board[][
 	for (i = 2; i < count; i++) { // for each word in word array
 		found = false;
 		for (j = 0; j < array_index; j++) { // for each already placed word
-
 			for (k = 0; k < strlen(words[i]); k++) { // for each letter in word to be placed
 
 				for (l = 0; l < dataArray[j].len; l++) {
 					
 					if (words[i][k] == (dataArray[j].word)[l]) {
-						printf("%c\n", words[i][k]);
 						// check method: across and down
-						wordrow = dataArray[j].row - k;
-						wordcol = dataArray[j].col + l;
 						bool badcond = false;
 						if (dataArray[j].dir == 'A') {// new word must go down
-							for (m = 1; m < strlen(words[i]); m++) {
+							wordrow = dataArray[j].row - k;
+							wordcol = dataArray[j].col + l;
+							for (m = 0; m < strlen(words[i]); m++) {
+								// how to make it so they get one exception
 								if ((wordrow+m < 0) || (wordrow+m >= SIZE) || solution_board[wordrow+m][wordcol] != '.' || solution_board[wordrow+m][wordcol-1] != '.' || solution_board[wordrow+m][wordcol+1] != '.') {
 									badcond = true;
 									break;	
@@ -204,7 +203,11 @@ void placewords(WordData dataArray[], char words[][SIZE], char solution_board[][
 							update(dataArray, words, i, wordrow, wordcol, 'D', &array_index);
 						}
 						if (dataArray[j].dir == 'D') {// new word must go across
-							for (m = 1; m < strlen(words[i]); m++) {
+
+							wordrow = dataArray[j].row - k;
+							wordcol = dataArray[j].col + l;
+							for (m = 0; m < strlen(words[i]); m++) {
+								// how to make it so that they get one exception?
 								if ( (wordcol+m < 0) || (wordcol+m >= SIZE) || solution_board[wordrow][wordcol+m] != '.' || solution_board[wordrow+1][wordcol+m] != '.' || solution_board[wordrow-1][wordcol+m] != '.') {
 									badcond = true;
 									break;
@@ -213,6 +216,7 @@ void placewords(WordData dataArray[], char words[][SIZE], char solution_board[][
 							if (wordcol+m <= SIZE && solution_board[wordrow][wordcol+m] != '.') badcond = true;
 							if (badcond) break;
 							// if we make it here, word fits on board
+							printf("%d\n", wordrow);
 							for (m = 0; m < strlen(words[i]); m++) {
 								solution_board[wordrow][wordcol+m] = words[i][m];
 								puzzle_board[wordrow][wordcol+m] = ' ';
