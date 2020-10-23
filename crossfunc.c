@@ -187,7 +187,6 @@ void placewords(WordData dataArray[], char words[][SIZE], char solution_board[][
 						if (dataArray[j].dir == 'A') {// new word must go down
 							wordrow = dataArray[j].row - k;
 							wordcol = dataArray[j].col + l;
-							printf("%c %d %d \n", words[i][k], wordrow, wordcol);
 							for (m = 0; m < strlen(words[i]); m++) { // should be zero start
 								// how to make it so they get one exception
 								if ( (wordrow+m < 0) || (wordrow+m >= SIZE) || solution_board[wordrow+m][wordcol] != '.' || solution_board[wordrow+m][wordcol-1] != '.' || solution_board[wordrow+m][wordcol+1] != '.') {
@@ -203,6 +202,7 @@ void placewords(WordData dataArray[], char words[][SIZE], char solution_board[][
 							if (badcond) break;
 							// if we make it here, then word will fit nicely on board
 							for (m = 0; m < strlen(words[i]); m++) {
+								printf("%c %d %d", words[i][m], wordrow+m, wordcol);
 								solution_board[wordrow+m][wordcol] = words[i][m];
 								puzzle_board[wordrow+m][wordcol] = ' ';
 							}
