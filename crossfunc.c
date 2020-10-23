@@ -181,13 +181,13 @@ void placewords(WordData dataArray[], char words[][SIZE], char solution_board[][
 				for (l = 0; l < dataArray[j].len; l++) {
 					
 					if (words[i][k] == (dataArray[j].word)[l]) {
-						printf("%s\n", dataArray[j].word);
 						// check method: across and down
 						int exceptions = 0; // for when checking if word can fit, do not include 
 						bool badcond = false;
 						if (dataArray[j].dir == 'A') {// new word must go down
 							wordrow = dataArray[j].row - k;
 							wordcol = dataArray[j].col + l;
+							printf("%d %d \n", wordrow, wordcol);
 							for (m = 0; m < strlen(words[i]); m++) { // should be zero start
 								// how to make it so they get one exception
 								if ( (wordrow+m < 0) || (wordrow+m >= SIZE) || solution_board[wordrow+m][wordcol] != '.' || solution_board[wordrow+m][wordcol-1] != '.' || solution_board[wordrow+m][wordcol+1] != '.') {
