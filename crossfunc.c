@@ -181,12 +181,13 @@ void placewords(WordData dataArray[], char words[][SIZE], char solution_board[][
 				for (l = 0; l < dataArray[j].len; l++) {
 					
 					if (words[i][k] == (dataArray[j].word)[l]) {
+						printf("%c\n", words[i][k]);
 						// check method: across and down
 						wordrow = dataArray[j].row - k;
 						wordcol = dataArray[j].col + l;
 						bool badcond = false;
 						if (dataArray[j].dir == 'A') {// new word must go down
-							for (m = 0; m < strlen(words[i]); m++) {
+							for (m = 1; m < strlen(words[i]); m++) {
 								if ((wordrow+m < 0) || (wordrow+m >= SIZE) || solution_board[wordrow+m][wordcol] != '.' || solution_board[wordrow+m][wordcol-1] != '.' || solution_board[wordrow+m][wordcol+1] != '.') {
 									badcond = true;
 									break;	
@@ -196,14 +197,14 @@ void placewords(WordData dataArray[], char words[][SIZE], char solution_board[][
 							if (badcond) break;
 							// if we make it here, then word will fit nicely on board
 							for (m = 0; m < strlen(words[i]); m++) {
-								solution_board[wordrow+m][wordcol] = words[i][l];
+								solution_board[wordrow+m][wordcol] = words[i][m];
 								puzzle_board[wordrow][wordcol+m] = ' ';
 							}
 							found = true;
 							update(dataArray, words, i, wordrow, wordcol, 'D', &array_index);
 						}
 						if (dataArray[j].dir == 'D') {// new word must go across
-							for (m = 0; m < strlen(words[i]); m++) {
+							for (m = 1; m < strlen(words[i]); m++) {
 								if ( (wordcol+m < 0) || (wordcol+m >= SIZE) || solution_board[wordrow][wordcol+m] != '.' || solution_board[wordrow+1][wordcol+m] != '.' || solution_board[wordrow-1][wordcol+m] != '.') {
 									badcond = true;
 									break;
@@ -213,7 +214,7 @@ void placewords(WordData dataArray[], char words[][SIZE], char solution_board[][
 							if (badcond) break;
 							// if we make it here, word fits on board
 							for (m = 0; m < strlen(words[i]); m++) {
-								solution_board[wordrow][wordcol+m] = words[i][l];
+								solution_board[wordrow][wordcol+m] = words[i][m];
 								puzzle_board[wordrow][wordcol+m] = ' ';
 							}
 							found = true;
