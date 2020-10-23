@@ -174,12 +174,14 @@ void placewords(WordData dataArray[], char words[][SIZE], char solution_board[][
 	// DO REST OF WORDS
 	for (i = 2; i < count; i++) { // for each word in word array
 		found = false;
+		printf("%s: ", words[i]); 
 		for (j = 0; j < array_index; j++) { // for each already placed word
 			for (k = 0; k < strlen(words[i]); k++) { // for each letter in word to be placed
 
 				for (l = 0; l < dataArray[j].len; l++) {
 					
 					if (words[i][k] == (dataArray[j].word)[l]) {
+						printf("%s\n", dataArray[j].word);
 						// check method: across and down
 						int exceptions = 0; // for when checking if word can fit, do not include 
 						bool badcond = false;
