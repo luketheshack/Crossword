@@ -185,7 +185,7 @@ void placewords(WordData dataArray[], char words[][SIZE], char solution_board[][
 						if (dataArray[j].dir == 'A') {// new word must go down
 							wordrow = dataArray[j].row - k;
 							wordcol = dataArray[j].col + l;
-							for (m = 0; m < strlen(words[i]); m++) {
+							for (m = 1; m < strlen(words[i]); m++) { // should be zero start
 								// how to make it so they get one exception
 								if ((wordrow+m < 0) || (wordrow+m >= SIZE) || solution_board[wordrow+m][wordcol] != '.' || solution_board[wordrow+m][wordcol-1] != '.' || solution_board[wordrow+m][wordcol+1] != '.') {
 									badcond = true;
@@ -203,10 +203,10 @@ void placewords(WordData dataArray[], char words[][SIZE], char solution_board[][
 							update(dataArray, words, i, wordrow, wordcol, 'D', &array_index);
 						}
 						if (dataArray[j].dir == 'D') {// new word must go across
-
+							//printf("%d %d\n", dataArray[j].row, k);
 							wordrow = dataArray[j].row - k;
 							wordcol = dataArray[j].col + l;
-							for (m = 0; m < strlen(words[i]); m++) {
+							for (m = 1; m < strlen(words[i]); m++) { // should be zero start
 								// how to make it so that they get one exception?
 								if ( (wordcol+m < 0) || (wordcol+m >= SIZE) || solution_board[wordrow][wordcol+m] != '.' || solution_board[wordrow+1][wordcol+m] != '.' || solution_board[wordrow-1][wordcol+m] != '.') {
 									badcond = true;
