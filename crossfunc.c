@@ -250,17 +250,20 @@ void placewords(WordData dataArray[], char words[][SIZE], char solution_board[][
 	}
 }
 
-void showclues(WordData dataArray[], char clues[][SIZE], int count) {
+void showclues(WordData dataArray[], char clues[][SIZE], int array_index) {
 	printf("\nClues: \n");
 	printf("Direction | Anagram | Location \n");
 	int i;
-	for (i = 0; i < count; i++) {
+	for (i = 0; i < array_index; i++) {
 		if (dataArray[i].dir == 'A') {
 			printf("Across   |");
 		}
 		else {
 			printf("Down     |");
 		}
+		printf("%16s |", dataArray[i].clue);
+		printf("%d, %d \n", dataArray[i].row, dataArray[i].col);
 
 	}	
+	printf("\n");
 } 
