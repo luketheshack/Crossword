@@ -63,6 +63,9 @@ int format_word(char word[]) {
 			break;
 		}
 		else {
+			if (word[c] == '\n') {
+				word[c] = '\0';
+			}
 			word[c] = toupper(word[c]);
 		}
 	}
