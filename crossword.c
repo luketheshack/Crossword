@@ -34,6 +34,7 @@ int main(int argc, char *argv[]) {
 		errorCode = get_input(words, &count, argv[1]);
 		if (errorCode != 0) return 1;
 		WordData dataArray[count];
+		sortwords(words, count);
 		int array_index = placewords(dataArray, words, solution_board, puzzle_board, count);
 		display(solution_board);
 		display(puzzle_board);
