@@ -286,4 +286,30 @@ void showclues(WordData dataArray[], int array_index) {
 
 	}	
 	printf("\n");
+}
+
+void output_clues(WordData dataArray[], int array_index, FILE *fp) {
+	fputs("\n", fp);
+	printf("Direction |     Anagram     | Location \n");
+	int i;
+	char *clue = malloc(18*sizeof(char));
+		
+	for (i = 0; i < array_index; i++) {
+		if (dataArray[i].dir == 'A') {
+			fputs("Across    |", fp);
+		}
+		else {
+			fputs("Down      |", fp);
+		}
+		clue = dataArray[i].clue;
+		fputs(clue, fp);
+		fputs(" |", fp);
+		fputc(' ', fp);
+		fputc( (char) dataArray[i].row , fp);
+		fputc(' ', fp);
+		fputc( (char) dataArray[i].col , fp);
+		fputs(" \n", fp);
+	}
+	fputs(" \n", fp);
+
 } 
