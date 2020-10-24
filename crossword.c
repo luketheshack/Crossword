@@ -47,9 +47,7 @@ int main(int argc, char *argv[]) {
 		WordData dataArray[count];
 		sortwords(words, count);
 		int array_index = placewords(dataArray, words, solution_board, puzzle_board, count);
-		
 		output_board(solution_board, fp);
-		printf("\nHere\n");
 		output_board(puzzle_board, fp);
 	}
 
