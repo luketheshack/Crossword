@@ -191,6 +191,8 @@ int placewords(WordData dataArray[], char words[][SIZE], char solution_board[][S
 	for (i = 2; i < count; i++) { // for each word in word array
 		found = false;
 		for (j = 0; j < array_index; j++) { // for each already placed word
+			if (dataArray[j].seen) { // ensure word is actually on the board
+
 			for (k = 0; k < strlen(words[i]); k++) { // for each letter in word to be placed
 
 				for (l = 0; l < dataArray[j].len; l++) {
@@ -268,6 +270,8 @@ int placewords(WordData dataArray[], char words[][SIZE], char solution_board[][S
 				if (found) break;	
 			}
 			if (found) break;
+
+			}
 		}
 		if (!found) {
 			printf("Cannot place word \"%s\".\n", words[i]);
@@ -275,6 +279,14 @@ int placewords(WordData dataArray[], char words[][SIZE], char solution_board[][S
 		}
 	}
 	return array_index;
+}
+
+void try_place_again(WordData dataArray[], int array_index, char solution_board[][SIZE], char puzzle_board[][SIZE]) {
+	int i;
+	bool found;
+	for (i = 0; i < array_index; i++) {
+		
+	}
 }
 
 void showclues(WordData dataArray[], int array_index) {
