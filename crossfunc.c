@@ -58,7 +58,7 @@ int format_word(char word[]) {
 	for (c = 0; c < strlen(word); c++) {
 		if (!isalpha(word[c]) && word[c] != '\n') { // cannot be the enter key or non-alphabetic character
 			printf("%d\n", (int) word[c]);
-			printf("Non-alphabetic character detected. Selected word cannot be added.\n", word);
+			printf("Non-alphabetic character detected. Selected word cannot be added.\n");
 			returnCode = 1;
 			break;
 		}
