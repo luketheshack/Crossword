@@ -26,8 +26,9 @@ int main(int argc, char *argv[]) {
 		WordData dataArray[count];
 		int i;
 		sortwords(words, count);
-		placewords(dataArray, words, solution_board, puzzle_board, count);
+		int array_index = placewords(dataArray, words, solution_board, puzzle_board, count);
 		display(solution_board);
+		showclues(dataArray, array_index);
 	}
 
 	else if (argc == 2) {

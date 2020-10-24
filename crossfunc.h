@@ -23,5 +23,5 @@ int get_input(char [][SIZE]); //
 void interactive_input(char [][SIZE], int *count); // 
 int format_word(char []);
 void sortwords(char [][SIZE], int count); // 
-void placewords(WordData [], char [][SIZE], char [][SIZE], char [][SIZE], int);
-void showclues(WordData [], char [][SIZE], int count);
+int placewords(WordData [], char [][SIZE], char [][SIZE], char [][SIZE], int);
+void showclues(WordData [], int);

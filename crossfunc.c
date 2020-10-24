@@ -122,7 +122,7 @@ void update(WordData dataArray[], char words[][SIZE], int wordindex, int wordrow
 	(*array_index)++;
 }
 
-void placewords(WordData dataArray[], char words[][SIZE], char solution_board[][SIZE], char puzzle_board[][SIZE], int count) {
+int placewords(WordData dataArray[], char words[][SIZE], char solution_board[][SIZE], char puzzle_board[][SIZE], int count) {
 	int i = 0, wordrow, wordcol, array_index = 0;
 	// DO FIRST WORD
 	if (i >= count) return;
@@ -248,9 +248,11 @@ void placewords(WordData dataArray[], char words[][SIZE], char solution_board[][
 			printf("Cannot place word.\n");
 		}
 	}
+	printf("%d\n", array_index);
+	return array_index;
 }
 
-void showclues(WordData dataArray[], char clues[][SIZE], int array_index) {
+void showclues(WordData dataArray[], int array_index) {
 	printf("\nClues: \n");
 	printf("Direction | Anagram | Location \n");
 	int i;
