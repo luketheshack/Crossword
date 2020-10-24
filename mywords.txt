@@ -1,4 +1,7 @@
-luke
-alvin
-inno
+octopus
+octi
+okta
+cactus
+iphone
+yellow
 .
