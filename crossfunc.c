@@ -167,6 +167,9 @@ int placewords(WordData dataArray[], char words[][SIZE], char solution_board[][S
 		printf("Unable to place word.\n");
 	}
 	// DO REST OF WORDS
+	//
+	// error is that starting coordinates for cactus (down word) are off
+	//
 	for (i = 2; i < count; i++) { // for each word in word array
 		found = false;
 		for (j = 0; j < array_index; j++) { // for each already placed word
@@ -179,10 +182,9 @@ int placewords(WordData dataArray[], char words[][SIZE], char solution_board[][S
 						int exceptions = 0; // for when checking if word can fit, do not include 
 						bool badcond = false;
 						if (dataArray[j].dir == 'A') {// new word must go down
-
-							//
-							wordrow = dataArray[j].row - k;
-							wordcol = dataArray[j].col + l;
+							
+							wordrow = dataArray[j].row - k; // - k
+							wordcol = dataArray[j].col + l; // + l
 							for (m = 0; m < strlen(words[i]); m++) { // should be zero start
 								if ( (wordrow+m < 0) || (wordrow+m >= SIZE) || solution_board[wordrow+m][wordcol] != '.' || solution_board[wordrow+m][wordcol-1] != '.' || solution_board[wordrow+m][wordcol+1] != '.') {
 									if (exceptions == 0 && (wordrow + m >= 0 && wordrow + m < SIZE)) {
@@ -225,10 +227,11 @@ int placewords(WordData dataArray[], char words[][SIZE], char solution_board[][S
 							if (badcond) break;
 
 							// if we make it here, word fits on board
-							printf("%s %d %d\n", words[i], wordrow, wordcol);
+							printf("%s attached to %s, starting at %d %d\n", words[i], dataArray[j].word, wordrow, wordcol);
+							printf("%s coords: %d %d\n", dataArray[j].word, dataArray[j].row, dataArray[j].col);
 							for (m = 0; m < strlen(words[i]); m++) {
 
-								printf("%c %d %d\n", words[i][m], wordrow+m, wordcol);
+								//printf("%c %d %d\n", words[i][m], wordrow+m, wordcol);
 								solution_board[wordrow][wordcol+m] = words[i][m];
 								puzzle_board[wordrow][wordcol+m] = ' ';
 							}
