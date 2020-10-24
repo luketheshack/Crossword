@@ -17,7 +17,7 @@ void display(char board[][SIZE]) {
 	printf("\nX-------------------------------X\n\n");
 }
 
-void printboard(char board[][SIZE], FILE *fp) {
+void output_board(char board[][SIZE], FILE *fp) {
 	fputs("\nX-------------------------------X", fp);
 	int i, j;
 	char c;
@@ -72,7 +72,6 @@ int format_word(char word[]) {
 	}
 	for (c = 0; c < strlen(word); c++) {
 		if (!isalpha(word[c]) && word[c] != '\n') { // cannot be the enter key or non-alphabetic character
-			printf("%d\n", (int) word[c]);
 			printf("Non-alphabetic character detected. Selected word cannot be added.\n");
 			returnCode = 1;
 			break;

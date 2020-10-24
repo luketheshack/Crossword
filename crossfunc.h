@@ -26,4 +26,4 @@ void sortwords(char [][SIZE], int count); //
 int placewords(WordData [], char [][SIZE], char [][SIZE], char [][SIZE], int);
 void showclues(WordData [], int);
 void to_text_file(WordData [], char [][SIZE], char [][SIZE]);
-void printboard(char [][SIZE], FILE *);
+void output_board(char [][SIZE], FILE *);
