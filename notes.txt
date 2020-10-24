@@ -1,0 +1,4 @@
+Last things to do:
+
+fix weird 2nd word / down word bug
+make it actually try again to place word

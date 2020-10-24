@@ -268,7 +268,7 @@ int placewords(WordData dataArray[], char words[][SIZE], char solution_board[][S
 			}
 		}
 		if (!found) {
-			printf("Cannot place word \"%s\".\n", words[i]);
+			printf("Cannot place word \"%s\" on first pass.\n", words[i]);
 			update(dataArray, words, i, -100, -100, 'N', &array_index, false); // N stands for neither, -100 coordinates so that it doesn't interfere with board
 		}
 	}
@@ -290,7 +290,7 @@ void try_place_again(WordData dataArray[], int array_index, char solution_board[
 					for (l = 0; l < dataArray[j].len; j++) {
 					
 					if ((dataArray[i].word)[k] == (dataArray[j].word)[l]) {
-							
+						printf("%c\n", (dataArray[i].word)[k]);	
 						int exceptions = 0; // for when checking if word can fit, do not include 
 						bool badcond = false;
 						if (dataArray[j].dir == 'A') {// new word must go down
@@ -355,16 +355,18 @@ void try_place_again(WordData dataArray[], int array_index, char solution_board[
 							dataArray[i].dir = 'A';
 						}
 					}
-					if (found) break;
+					if (found) {
+						printf("placed");
+						break;
+					}
+					}
 				}
 				if (found) break;
 			}
 			if (found) break;
-			}
 		}
 		if (found) break;	
-	}
-
+		}
 	}
 }
 
