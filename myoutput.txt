@@ -36,3 +36,9 @@ X-------------------------------X
 | # # # # # # # # # # # # # # # |
 X-------------------------------X
 
+
+Direction |     Anagram     | Location 
+Across    |LVAIN | 7, 5 
+Down      |ULEK | 6, 6 
+Down      |NNIO | 7, 8 
+ 

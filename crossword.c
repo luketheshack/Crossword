@@ -49,6 +49,7 @@ int main(int argc, char *argv[]) {
 		int array_index = placewords(dataArray, words, solution_board, puzzle_board, count);
 		output_board(solution_board, fp);
 		output_board(puzzle_board, fp);
+		output_clues(dataArray, array_index, fp);
 	}
 
 	else {

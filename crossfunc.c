@@ -290,9 +290,10 @@ void showclues(WordData dataArray[], int array_index) {
 
 void output_clues(WordData dataArray[], int array_index, FILE *fp) {
 	fputs("\n", fp);
-	printf("Direction |     Anagram     | Location \n");
+	fputs("Direction |     Anagram     | Location \n", fp);
 	int i;
 	char *clue = malloc(18*sizeof(char));
+	char c;
 		
 	for (i = 0; i < array_index; i++) {
 		if (dataArray[i].dir == 'A') {
@@ -305,9 +306,11 @@ void output_clues(WordData dataArray[], int array_index, FILE *fp) {
 		fputs(clue, fp);
 		fputs(" |", fp);
 		fputc(' ', fp);
-		fputc( (char) dataArray[i].row , fp);
-		fputc(' ', fp);
-		fputc( (char) dataArray[i].col , fp);
+		c = dataArray[i].row + '0';
+		fputc( c , fp);
+		fputs(", ", fp);
+		c = dataArray[i].col + '0';
+		fputc( c , fp);
 		fputs(" \n", fp);
 	}
 	fputs(" \n", fp);
