@@ -125,13 +125,14 @@ void sortwords(char words[][SIZE], int count) {
 	return;
 }
 
-void update(WordData dataArray[], char words[][SIZE], int wordindex, int wordrow, int wordcol, char direction, int *array_index) {
+void update(WordData dataArray[], char words[][SIZE], int wordindex, int wordrow, int wordcol, char direction, int *array_index, bool seenword) {
 	strcpy(dataArray[*array_index].word, words[wordindex]);
 	char wrd[SIZE];
 	strcpy(wrd, dataArray[*array_index].word);
 	strfry(wrd); // generate clue
 	strcpy(dataArray[*array_index].clue, wrd); 
 	dataArray[*array_index].len = strlen(words[wordindex]);
+	dataArray[*array_index].seen = seenword;
 	dataArray[*array_index].row = wordrow;
 	dataArray[*array_index].col = wordcol;
 	dataArray[*array_index].dir = direction;
@@ -150,7 +151,7 @@ int placewords(WordData dataArray[], char words[][SIZE], char solution_board[][S
 	}	
 	i++;
 	
-	update(dataArray, words, 0, wordrow, wordcol, 'A', &array_index); // change to 'A'
+	update(dataArray, words, 0, wordrow, wordcol, 'A', &array_index, true); // change to 'A'
 	
 	// DO SECOND WORD
 	if (i < count) return;
@@ -173,13 +174,14 @@ int placewords(WordData dataArray[], char words[][SIZE], char solution_board[][S
 					puzzle_board[wordrow+l][wordcol] = ' ';
 				}
 				// update data array
-				update(dataArray, words, 1, wordcol, wordcol, 'D', &array_index); 
+				update(dataArray, words, 1, wordcol, wordcol, 'D', &array_index, true); 
 				break;
 			}
 		}
 		if (found) break;
 	}
 	if (!found) {
+		update(dataArray, words, 1, -100, -100, 'D', &array_index, false); 
 		printf("Unable to place word.\n");
 	}
 	// DO REST OF WORDS
@@ -221,7 +223,7 @@ int placewords(WordData dataArray[], char words[][SIZE], char solution_board[][S
 							}
 							found = true;
 							printf("%s %d %d\n", words[i], wordrow, wordcol);
-							update(dataArray, words, i, wordrow, wordcol, 'D', &array_index);
+							update(dataArray, words, i, wordrow, wordcol, 'D', &array_index, true);
 
 						}
 						if (dataArray[j].dir == 'D') {// new word must go across
@@ -256,7 +258,7 @@ int placewords(WordData dataArray[], char words[][SIZE], char solution_board[][S
 							found = true;
 
 							printf("%s %d %d\n", words[i], wordrow, wordcol);
-							update(dataArray, words, i, wordrow, wordcol, 'A', &array_index);
+							update(dataArray, words, i, wordrow, wordcol, 'A', &array_index, true);
 
 						}
 						if (found) break;
@@ -269,7 +271,7 @@ int placewords(WordData dataArray[], char words[][SIZE], char solution_board[][S
 		}
 		if (!found) {
 			printf("Cannot place word \"%s\".\n", words[i]);
-			update(dataArray, words, i, -100, -100, 'N', &array_index); // N stands for neither, -100 coordinates so that it doesn't interfere with board
+			update(dataArray, words, i, -100, -100, 'N', &array_index, false); // N stands for neither, -100 coordinates so that it doesn't interfere with board
 		}
 	}
 	return array_index;
@@ -301,22 +303,24 @@ void output_clues(WordData dataArray[], int array_index, FILE *fp) {
 	char c;
 		
 	for (i = 0; i < array_index; i++) {
-		if (dataArray[i].dir == 'A') {
-			fputs("Across    |", fp);
+		if (dataArray[i].seen) {
+			if (dataArray[i].dir == 'A') {
+				fputs("Across    |", fp);
+			}
+			else {
+				fputs("Down      |", fp);
+			}
+			clue = dataArray[i].clue;
+			fputs(clue, fp);
+			fputs(" |", fp);
+			fputc(' ', fp);
+			c = dataArray[i].row + '0';
+			fputc( c , fp);
+			fputs(", ", fp);
+			c = dataArray[i].col + '0';
+			fputc( c , fp);
+			fputs(" \n", fp);
 		}
-		else {
-			fputs("Down      |", fp);
-		}
-		clue = dataArray[i].clue;
-		fputs(clue, fp);
-		fputs(" |", fp);
-		fputc(' ', fp);
-		c = dataArray[i].row + '0';
-		fputc( c , fp);
-		fputs(", ", fp);
-		c = dataArray[i].col + '0';
-		fputc( c , fp);
-		fputs(" \n", fp);
 	}
 	fputs(" \n", fp);
 
