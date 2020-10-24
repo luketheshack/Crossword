@@ -30,6 +30,7 @@ void output_board(char board[][SIZE], FILE *fp) {
 		}
 		fputc('|', fp);
 	}
+	fputs("\nX-------------------------------X\n\n", fp);
 }
 
 int get_input(char words[][SIZE], int *count, char *fn) {
@@ -72,7 +73,7 @@ int format_word(char word[]) {
 	}
 	for (c = 0; c < strlen(word); c++) {
 		if (!isalpha(word[c]) && word[c] != '\n') { // cannot be the enter key or non-alphabetic character
-			printf("Non-alphabetic character detected. Selected word cannot be added.\n");
+			printf("Non-alphabetic character detected. Word cannot be added.\n");
 			returnCode = 1;
 			break;
 		}
