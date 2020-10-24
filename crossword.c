@@ -28,6 +28,7 @@ int main(int argc, char *argv[]) {
 		sortwords(words, count);
 		int array_index = placewords(dataArray, words, solution_board, puzzle_board, count);
 		display(solution_board);
+		display(puzzle_board);
 		showclues(dataArray, array_index);
 	}
 
