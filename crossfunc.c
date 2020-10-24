@@ -269,6 +269,7 @@ int placewords(WordData dataArray[], char words[][SIZE], char solution_board[][S
 		}
 		if (!found) {
 			printf("Cannot place word \"%s\".\n", words[i]);
+			update(dataArray, words, i, -100, -100, 'N', &array_index); // N stands for neither, -100 coordinates so that it doesn't interfere with board
 		}
 	}
 	return array_index;

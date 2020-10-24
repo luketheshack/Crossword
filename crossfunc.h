@@ -13,6 +13,7 @@ typedef struct {
 	char word[15]; // word itself
 	char clue[15];
 	int len; // length of word
+	bool placed;
 	int row; // row where it starts
 	int col; // col where it starts
 	char dir; // direction --> d (down) or a (across)
