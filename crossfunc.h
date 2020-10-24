@@ -19,7 +19,7 @@ typedef struct {
 } WordData;
 
 void display(char [][SIZE]);
-int get_input(char [][SIZE]); // 
+int get_input(char [][SIZE], int *, char *); // 
 void interactive_input(char [][SIZE], int *count); // 
 int format_word(char []);
 void sortwords(char [][SIZE], int count); // 

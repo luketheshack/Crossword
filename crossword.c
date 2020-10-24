@@ -11,7 +11,7 @@ int main(int argc, char *argv[]) {
 	char solution_board[SIZE][SIZE]; // 15 by fifteen?? must make display function
 	char puzzle_board[SIZE][SIZE];
 	// and stuff to check . will prob need more
-	int i,j,count;
+	int i,j,count = 0;
 
 	for (i = 0; i < SIZE; i++) {
 		for (j = 0; j < SIZE; j++) {
@@ -21,10 +21,8 @@ int main(int argc, char *argv[]) {
 	}
 
 	if (argc == 1) { // get user input
-		display(solution_board);
 		interactive_input(words, &count);
 		WordData dataArray[count];
-		int i;
 		sortwords(words, count);
 		int array_index = placewords(dataArray, words, solution_board, puzzle_board, count);
 		display(solution_board);
@@ -33,12 +31,16 @@ int main(int argc, char *argv[]) {
 	}
 
 	else if (argc == 2) {
-		errorCode = get_input(words);
+		errorCode = get_input(words, &count);
 		if (errorCode != 0) return 1;
-
+		WordData dataArray[count];
+		int array_index = placewords(dataArray, words, solution_board, puzzle_board, count);
+		display(solution_board);
+		display(puzzle_board);
+		showclues(dataArray, array_index);
 	}
 	else if (argc == 3) {
-		errorCode = get_input(words);
+		errorCode = get_input(words, &count);
 		if (errorCode != 0) return 1;
 	}
 

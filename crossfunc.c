@@ -17,13 +17,9 @@ void display(char board[][SIZE]) {
 	printf("\nX-------------------------------X\n\n");
 }
 
-int get_input(char words[][SIZE]) {
+int get_input(char words[][SIZE], int *count, char *fn) {
 	FILE *fp;
-	char *fn = malloc(25*sizeof(char));
 	int returnCode = 0;
-	printf("What is the name of this file? ");
-	scanf("%s", fn);
-	free(fn);
 	fp = fopen(fn, "r");
 	if (!fp) {
 		printf("File could not be found. Quitting program...\n");
@@ -46,6 +42,7 @@ int get_input(char words[][SIZE]) {
 			++ct;	
 		}
 	}
+	*count = ct;
 	return returnCode;
 	
 }
