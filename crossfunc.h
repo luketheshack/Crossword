@@ -11,9 +11,10 @@
 
 typedef struct {
 	char word[15]; // word itself
-	char len; // length of word
-	char row; // row where it starts
-	char col; // col where it starts
+	char clue[15];
+	int len; // length of word
+	int row; // row where it starts
+	int col; // col where it starts
 	char dir; // direction --> d (down) or a (across)
 } WordData;
 
@@ -22,5 +23,5 @@ int get_input(char [][SIZE]); //
 void interactive_input(char [][SIZE], int *count); // 
 int format_word(char []);
 void sortwords(char [][SIZE], int count); // 
-void makeclues(char [][SIZE], char [][SIZE], int count); //
 void placewords(WordData [], char [][SIZE], char [][SIZE], char [][SIZE], int);
+void showclues(WordData [], char [][SIZE], int count);

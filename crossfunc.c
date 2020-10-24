@@ -109,18 +109,12 @@ void sortwords(char words[][SIZE], int count) {
 	return;
 }
 
-void makeclues(char words[][SIZE], char clues[][SIZE], int count) {
-	int i;
-	char wrd[SIZE];
-	for (i = 0; i < count; i++) {
-		strcpy(wrd, words[i]);
-		strfry(wrd);
-		strcpy(clues[i], wrd);
-	}
-}
-
 void update(WordData dataArray[], char words[][SIZE], int wordindex, int wordrow, int wordcol, char direction, int *array_index) {
 	strcpy(dataArray[*array_index].word, words[wordindex]);
+	char wrd[SIZE];
+	strcpy(wrd, dataArray[*array_index].word);
+	strfry(wrd); // generate clue
+	strcpy(dataArray[*array_index].clue, wrd); 
 	dataArray[*array_index].len = strlen(words[wordindex]);
 	dataArray[*array_index].row = wordrow;
 	dataArray[*array_index].col = wordcol;
@@ -189,7 +183,6 @@ void placewords(WordData dataArray[], char words[][SIZE], char solution_board[][
 							wordrow = dataArray[j].row - k;
 							wordcol = dataArray[j].col + l;
 							for (m = 0; m < strlen(words[i]); m++) { // should be zero start
-								// how to make it so they get one exception
 								if ( (wordrow+m < 0) || (wordrow+m >= SIZE) || solution_board[wordrow+m][wordcol] != '.' || solution_board[wordrow+m][wordcol-1] != '.' || solution_board[wordrow+m][wordcol+1] != '.') {
 									if (exceptions == 0 && (wordrow + m >= 0 && wordrow + m < SIZE)) {
 										exceptions++;
@@ -214,7 +207,7 @@ void placewords(WordData dataArray[], char words[][SIZE], char solution_board[][
 						if (dataArray[j].dir == 'D') {// new word must go across
 							
 							wordrow = dataArray[j].row + l;
-							wordcol = dataArray[j].col - k;
+							wordcol = dataArray[j].col - k; // -k
 							for (m = 0; m < strlen(words[i]); m++) { // should be zero start
 								// how to make it so that they get one exception?
 								if ( (wordcol+m < 0) || (wordcol+m >= SIZE) || solution_board[wordrow][wordcol+m] != '.' || solution_board[wordrow+1][wordcol+m] != '.' || solution_board[wordrow-1][wordcol+m] != '.') {
@@ -231,10 +224,14 @@ void placewords(WordData dataArray[], char words[][SIZE], char solution_board[][
 							if (badcond) break;
 
 							// if we make it here, word fits on board
+							printf("%s %d %d\n", words[i], wordrow, wordcol);
 							for (m = 0; m < strlen(words[i]); m++) {
+
+								printf("%c %d %d\n", words[i][m], wordrow+m, wordcol);
 								solution_board[wordrow][wordcol+m] = words[i][m];
 								puzzle_board[wordrow][wordcol+m] = ' ';
 							}
+							printf("\n");
 							found = true;
 							update(dataArray, words, i, wordrow, wordcol, 'A', &array_index);
 
@@ -251,4 +248,19 @@ void placewords(WordData dataArray[], char words[][SIZE], char solution_board[][
 			printf("Cannot place word.\n");
 		}
 	}
+}
+
+void showclues(WordData dataArray[], char clues[][SIZE], int count) {
+	printf("\nClues: \n");
+	printf("Direction | Anagram | Location \n");
+	int i;
+	for (i = 0; i < count; i++) {
+		if (dataArray[i].dir == 'A') {
+			printf("Across   |");
+		}
+		else {
+			printf("Down     |");
+		}
+
+	}	
 } 

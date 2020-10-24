@@ -8,7 +8,6 @@ int main(int argc, char *argv[]) {
 	// initial begin
 	int errorCode;
 	char words[numwords][SIZE]; // 20 words, 15 chars apiece
-	char clues[numwords][SIZE];
 	char solution_board[SIZE][SIZE]; // 15 by fifteen?? must make display function
 	char puzzle_board[SIZE][SIZE];
 	// and stuff to check . will prob need more
@@ -27,7 +26,6 @@ int main(int argc, char *argv[]) {
 		WordData dataArray[count];
 		int i;
 		sortwords(words, count);
-		makeclues(words, clues, count);
 		placewords(dataArray, words, solution_board, puzzle_board, count);
 		display(solution_board);
 	}
