@@ -31,7 +31,7 @@ int main(int argc, char *argv[]) {
 	}
 
 	else if (argc == 2) {
-		errorCode = get_input(words, &count);
+		errorCode = get_input(words, &count, argv[1]);
 		if (errorCode != 0) return 1;
 		WordData dataArray[count];
 		int array_index = placewords(dataArray, words, solution_board, puzzle_board, count);
@@ -40,7 +40,7 @@ int main(int argc, char *argv[]) {
 		showclues(dataArray, array_index);
 	}
 	else if (argc == 3) {
-		errorCode = get_input(words, &count);
+		errorCode = get_input(words, &count, argv[1]);
 		if (errorCode != 0) return 1;
 	}
 
