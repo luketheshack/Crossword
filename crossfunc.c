@@ -416,4 +416,12 @@ void output_clues(WordData dataArray[], int array_index, FILE *fp) {
 	}
 	fputs(" \n", fp);
 
+}
+
+int unplaced(WordData dataArray[], int array_index) {
+	int i, ct = 0;
+	for (i = 0; i < array_index; i++) {
+		if (!dataArray[i].seen) ct++;
+	}
+	return ct;
 } 

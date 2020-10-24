@@ -31,3 +31,4 @@ void showclues(WordData [], int);
 void to_text_file(WordData [], char [][SIZE], char [][SIZE]);
 void output_board(char [][SIZE], FILE *);
 void output_clues(WordData [], int, FILE *);
+int unplaced(WordData [], int);

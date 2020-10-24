@@ -25,12 +25,12 @@ int main(int argc, char *argv[]) {
 		WordData dataArray[count];
 		sortwords(words, count);
 		int array_index = placewords(dataArray, words, solution_board, puzzle_board, count);
-		display(solution_board);
-		display(puzzle_board);
-		int i;
-		for (i = 0; i < count-1; i++) {
+		int not_placed = unplaced(dataArray, array_index);
+		for (i = 0; i < not_placed; i++) {
 			try_place_again(dataArray, array_index, solution_board, puzzle_board);
 		}
+		display(solution_board);
+		display(puzzle_board);
 		showclues(dataArray, array_index);
 	}
 
@@ -40,11 +40,12 @@ int main(int argc, char *argv[]) {
 		WordData dataArray[count];
 		sortwords(words, count);
 		int array_index = placewords(dataArray, words, solution_board, puzzle_board, count);
-		display(solution_board);
-		display(puzzle_board);
-		for (i = 0; i < count-1; i++) {
+		int not_placed = unplaced(dataArray, array_index);
+		for (i = 0; i < not_placed; i++) {
 			try_place_again(dataArray, array_index, solution_board, puzzle_board);
 		}
+		display(solution_board);
+		display(puzzle_board);
 		showclues(dataArray, array_index);
 	}
 	else if (argc == 3) {
@@ -54,7 +55,8 @@ int main(int argc, char *argv[]) {
 		WordData dataArray[count];
 		sortwords(words, count);
 		int array_index = placewords(dataArray, words, solution_board, puzzle_board, count);
-		for (i = 0; i < count-1; i++) {
+		int not_placed = unplaced(dataArray, array_index);
+		for (i = 0; i < not_placed; i++) {
 			try_place_again(dataArray, array_index, solution_board, puzzle_board);
 		}
 		output_board(solution_board, fp);
