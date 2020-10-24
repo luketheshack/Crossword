@@ -57,6 +57,7 @@ int format_word(char word[]) {
 	}
 	for (c = 0; c < strlen(word); c++) {
 		if (!isalpha(word[c])) {
+			printf("%c\n", word[c]);
 			printf("Non-alphabetic character detected. Selected word cannot be added.\n", word);
 			returnCode = 1;
 			break;
