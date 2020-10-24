@@ -17,6 +17,21 @@ void display(char board[][SIZE]) {
 	printf("\nX-------------------------------X\n\n");
 }
 
+void printboard(char board[][SIZE], FILE *fp) {
+	fputs("\nX-------------------------------X", fp);
+	int i, j;
+	char c;
+	for (i = 0; i < SIZE; i++) {
+		fputs("\n| ", fp);
+		for (j = 0; j < SIZE; j++) {
+			c = board[i][j];
+			fputc(c, fp);
+			fputc(' ', fp);
+		}
+		fputc('|', fp);
+	}
+}
+
 int get_input(char words[][SIZE], int *count, char *fn) {
 	FILE *fp;
 	int returnCode = 0;
