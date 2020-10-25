@@ -296,7 +296,7 @@ void try_place_again(WordData dataArray[], int array_index, char solution_board[
 						int exceptions = 0; // for when checking if word can fit, do not include 
 						bool badcond = false;
 						if (dataArray[j].dir == 'A') {// new word must go down
-							
+							printf("Goes down\n");	
 							wordrow = dataArray[j].row - k;
 							wordcol = dataArray[j].col + l;
 
@@ -325,7 +325,6 @@ void try_place_again(WordData dataArray[], int array_index, char solution_board[
 							dataArray[i].dir = 'D';
 						}
 						if (dataArray[j].dir == 'D') {// new word must go across
-							
 							wordrow = dataArray[j].row + l;
 							wordcol = dataArray[j].col - k; // -k
 							for (m = 0; m < dataArray[i].len; m++) { // should be zero start
