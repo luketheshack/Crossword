@@ -280,23 +280,24 @@ int placewords(WordData dataArray[], char words[][SIZE], char solution_board[][S
 void try_place_again(WordData dataArray[], int array_index, char solution_board[][SIZE], char puzzle_board[][SIZE]) {
 	int i, j, k, l, m, wordrow, wordcol;
 	bool found;
-	for (i = 0; i < array_index; i++) {
+	for (i = 0; i < array_index; i++) { // for each word in the dataArray
 		found = false;
-		if (!dataArray[i].seen) {
+		if (!dataArray[i].seen) { // if the word hasn't been placed yet
 			
-		for (j = 0; j < array_index; j++) {
+		for (j = 0; j < array_index; j++) { // for each word in the dataArray
 			
-			if (i != j) {
+			if (i != j && dataArray[j].seen) { // if the word isn't the word we want to place, and the other word is on the board
 				for (k = 0; k < dataArray[i].len; k++) {
 
 					for (l = 0; l < dataArray[j].len; j++) {
+					
+					// add system to skip over words
 					
 					if ((dataArray[i].word)[k] == (dataArray[j].word)[l]) {
 						printf("%c\n", (dataArray[i].word)[k]);	
 						int exceptions = 0; // for when checking if word can fit, do not include 
 						bool badcond = false;
 						if (dataArray[j].dir == 'A') {// new word must go down
-							printf("Goes down\n");	
 							wordrow = dataArray[j].row - k;
 							wordcol = dataArray[j].col + l;
 
