@@ -174,7 +174,7 @@ int placewords(WordData dataArray[], char words[][SIZE], char solution_board[][S
 					puzzle_board[wordrow+l][wordcol] = ' ';
 				}
 				// update data array
-				update(dataArray, words, 1, wordcol, wordcol, 'D', &array_index, true); 
+				update(dataArray, words, 1, wordrow, wordcol, 'D', &array_index, true); 
 				break;
 			}
 		}
@@ -217,7 +217,8 @@ int placewords(WordData dataArray[], char words[][SIZE], char solution_board[][S
 							} 
 							if (wordrow+m <= SIZE && solution_board[wordrow+m][wordcol] != '.') badcond = true; 
 							if (badcond) break;
-
+							
+							//printf("%s : %c\n", dataArray[j].word, words[i][k]);
 							// if we make it here, then word will fit nicely on board
 							for (m = 0; m < strlen(words[i]); m++) {
 								solution_board[wordrow+m][wordcol] = words[i][m];
@@ -246,6 +247,7 @@ int placewords(WordData dataArray[], char words[][SIZE], char solution_board[][S
 							if (badcond) break;
 
 							// if we make it here, word fits on board
+							//printf("%s : %c\n", dataArray[j].word, words[i][k]);
 							for (m = 0; m < strlen(words[i]); m++) {
 
 								solution_board[wordrow][wordcol+m] = words[i][m];
