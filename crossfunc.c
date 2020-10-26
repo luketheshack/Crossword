@@ -225,6 +225,7 @@ int placewords(WordData dataArray[], char words[][SIZE], char solution_board[][S
 								}	
 							} 
 							if (wordrow+m <= SIZE && solution_board[wordrow+m][wordcol] != '.') badcond = true; 
+							if (wordrow != 0 && solution_board[wordrow-1][wordcol] != '.') badcond = true;
 							if (badcond) break;
 							
 							//printf("%s : %c\n", dataArray[j].word, words[i][k]);
@@ -253,6 +254,7 @@ int placewords(WordData dataArray[], char words[][SIZE], char solution_board[][S
 								}	
 							}
 							if (wordcol+m <= SIZE && solution_board[wordrow][wordcol+m] != '.') badcond = true;
+							if (wordcol != 0 && solution_board[wordrow][wordcol-1] != '.') badcond = true;
 							if (badcond) break;
 
 							// if we make it here, word fits on board
@@ -324,6 +326,7 @@ void try_place_again(WordData dataArray[], int array_index, char solution_board[
 								}	
 							} 
 							if (wordrow+m <= SIZE && solution_board[wordrow+m][wordcol] != '.') badcond = true; 
+							if (wordrow != 0 && solution_board[wordrow-1][wordcol] != '.') badcond = true;
 							if (badcond) break;
 
 							// if we make it here, then word will fit nicely on board
@@ -352,6 +355,7 @@ void try_place_again(WordData dataArray[], int array_index, char solution_board[
 								}	
 							}
 							if (wordcol+m <= SIZE && solution_board[wordrow][wordcol+m] != '.') badcond = true;
+							if (wordcol != 0 && solution_board[wordrow][wordcol-1] != '.') badcond = true;
 							if (badcond) break;
 
 							// if we make it here, word fits on board
