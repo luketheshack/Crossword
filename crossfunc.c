@@ -98,7 +98,6 @@ void interactive_input(char words[][SIZE], int *count) {
 		if (line[0] == '.') break;
 		code = format_word(line);
 		if (code == 0) {
-			//printf("%d  ", code);
 			if (strlen(line) < SIZE) {
 				strcpy(words[ct], line);
 				ct++;
@@ -226,6 +225,7 @@ int placewords(WordData dataArray[], char words[][SIZE], char solution_board[][S
 							}
 							found = true;
 							update(dataArray, words, i, wordrow, wordcol, 'D', &array_index, true);
+							printf("%c\n", dataArray[i].dir);
 
 						}
 						if (dataArray[j].dir == 'D') {// new word must go across
@@ -285,8 +285,8 @@ void try_place_again(WordData dataArray[], int array_index, char solution_board[
 		if (!dataArray[i].seen) { // if the word hasn't been placed yet
 			
 		for (j = 0; j < array_index; j++) { // for each word in the dataArray
-			
-			if (i != j && dataArray[j].seen) { // if the word isn't the word we want to place, and the other word is on the board
+			printf("%d %d\n", i, j);	
+			if ( (i != j) && dataArray[j].seen) { // if the word isn't the word we want to place, and the other word is on the board
 				for (k = 0; k < dataArray[i].len; k++) {
 
 					for (l = 0; l < dataArray[j].len; j++) {
@@ -294,7 +294,8 @@ void try_place_again(WordData dataArray[], int array_index, char solution_board[
 					// add system to skip over words
 					
 					if ((dataArray[i].word)[k] == (dataArray[j].word)[l]) {
-						printf("%c\n", (dataArray[i].word)[k]);	
+						printf("%d %d\n", i, j);
+						printf("%c %s \n", dataArray[j].dir, dataArray[j].word);	
 						int exceptions = 0; // for when checking if word can fit, do not include 
 						bool badcond = false;
 						if (dataArray[j].dir == 'A') {// new word must go down
@@ -407,6 +408,8 @@ void output_clues(WordData dataArray[], int array_index, FILE *fp) {
 				fputs("Down      |", fp);
 			}
 			clue = dataArray[i].clue;
+
+			fprintf(fp, "%-15s", clue);
 			fputs(clue, fp);
 			fputs(" |", fp);
 			fputc(' ', fp);
