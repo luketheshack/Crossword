@@ -65,7 +65,7 @@ int main(int argc, char *argv[]) {
 	}
 
 	else {
-		printf("\nThere was an error in your input. Please try again.\n");
+		printf("\nThere was an error in your input. You entered too many arguments. Please try again.\n");
 		return 0;
 	}
 
