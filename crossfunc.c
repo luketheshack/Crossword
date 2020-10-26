@@ -299,8 +299,8 @@ void try_place_again(WordData dataArray[], int array_index, char solution_board[
 					// add system to skip over words
 					
 					if ((dataArray[i].word)[k] == (dataArray[j].word)[l]) {
-						printf("%d %d\n", i, j);
-						printf("%c %s \n", dataArray[j].dir, dataArray[j].word);	
+						//printf("%d %d\n", i, j);
+						//printf("%c %s \n", dataArray[j].dir, dataArray[j].word);	
 						int exceptions = 0; // for when checking if word can fit, do not include 
 						bool badcond = false;
 						if (dataArray[j].dir == 'A') {// new word must go down
@@ -310,6 +310,7 @@ void try_place_again(WordData dataArray[], int array_index, char solution_board[
 							for (m = 0; m < dataArray[i].len; m++) { // should be zero start
 								if ( (wordrow+m < 0) || (wordrow+m >= SIZE) || solution_board[wordrow+m][wordcol] != '.' || solution_board[wordrow+m][wordcol-1] != '.' || solution_board[wordrow+m][wordcol+1] != '.') {
 									if (exceptions == 0 && (wordrow + m >= 0 && wordrow + m < SIZE)) {
+										//printf("%s %d"
 										exceptions++;
 									} else {
 										badcond = true;
