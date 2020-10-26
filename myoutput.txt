@@ -38,10 +38,10 @@ X-------------------------------X
 
 
 Direction |     Anagram     | Location 
-Across    |SCOTPUO        SCOTPUO | 7, 4 
-Down      |CSUTCA         CSUTCA | 7, 5 
-Down      |EINOPH         EINOPH | 6, 8 
-Across    |WLOLYE         WLOLYE | ;, 7 
-Across    |ICOT           ICOT | :, 3 
-Across    |OKAT           OKAT | 9, 8 
+Across    |         OOTCSPU | 7, 4 
+Down      |          CSTCUA | 7, 5 
+Down      |          EOIPNH | 6, 8 
+Across    |          LOLEWY | ;, 7 
+Across    |            CTIO | :, 3 
+Across    |            KOAT | 9, 8 
  

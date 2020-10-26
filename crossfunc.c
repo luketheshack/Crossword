@@ -409,10 +409,7 @@ void output_clues(WordData dataArray[], int array_index, FILE *fp) {
 			}
 			clue = dataArray[i].clue;
 
-			fprintf(fp, "%-15s", clue);
-			fputs(clue, fp);
-			fputs(" |", fp);
-			fputc(' ', fp);
+			fprintf(fp, " %15s | ", clue);
 			c = dataArray[i].row + '0';
 			fputc( c , fp);
 			fputs(", ", fp);
