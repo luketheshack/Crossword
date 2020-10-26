@@ -38,10 +38,10 @@ X-------------------------------X
 
 
 Direction |     Anagram     | Location 
-Across    |         OOTCSPU | 7, 4 
-Down      |          CSTCUA | 7, 5 
-Down      |          EOIPNH | 6, 8 
-Across    |          LOLEWY | ;, 7 
-Across    |            CTIO | :, 3 
-Across    |            KOAT | 9, 8 
+Across    |         TOSUCPO | 7, 4 
+Down      |          UTCCAS | 7, 5 
+Down      |          OHNIPE | 6, 8 
+Across    |          LLYOWE | 11, 7 
+Across    |            OCIT | 10, 3 
+Across    |            KATO | 9, 8 
  

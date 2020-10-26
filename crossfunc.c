@@ -397,7 +397,6 @@ void output_clues(WordData dataArray[], int array_index, FILE *fp) {
 	fputs("Direction |     Anagram     | Location \n", fp);
 	int i;
 	char *clue = malloc(18*sizeof(char));
-	char c;
 		
 	for (i = 0; i < array_index; i++) {
 		if (dataArray[i].seen) {
@@ -410,12 +409,7 @@ void output_clues(WordData dataArray[], int array_index, FILE *fp) {
 			clue = dataArray[i].clue;
 
 			fprintf(fp, " %15s | ", clue);
-			c = dataArray[i].row + '0';
-			fputc( c , fp);
-			fputs(", ", fp);
-			c = dataArray[i].col + '0';
-			fputc( c , fp);
-			fputs(" \n", fp);
+			fprintf(fp, "%d, %d \n", dataArray[i].row, dataArray[i].col);
 		}
 	}
 	fputs(" \n", fp);
