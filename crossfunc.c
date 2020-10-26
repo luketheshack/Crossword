@@ -176,7 +176,6 @@ int placewords(WordData dataArray[], char words[][SIZE], char solution_board[][S
 				wordcol = dataArray[0].col + k;
 				
 				if (wordrow < 0 || wordrow+strlen(words[1]) > SIZE) badcond = true;
-				printf("%c %d\n", words[1][j], wordrow+strlen(words[1]));
 				if (!badcond) {
 
 					found = true;
