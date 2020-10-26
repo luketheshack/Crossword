@@ -4,6 +4,7 @@
 
 #include "crossfunc.h"
 
+// This function prints a board to the console
 void display(char board[][SIZE]) {
 	printf("\nX-------------------------------X");
 	int i, j;
@@ -17,6 +18,7 @@ void display(char board[][SIZE]) {
 	printf("\nX-------------------------------X\n\n");
 }
 
+// This function prints a board to a file
 void output_board(char board[][SIZE], FILE *fp) {
 	fputs("\nX-------------------------------X", fp);
 	int i, j;
@@ -33,6 +35,7 @@ void output_board(char board[][SIZE], FILE *fp) {
 	fputs("\nX-------------------------------X\n\n", fp);
 }
 
+// this function gets user input from a file
 int get_input(char words[][SIZE], int *count, char *fn) {
 	FILE *fp;
 	int returnCode = 0;
@@ -62,7 +65,8 @@ int get_input(char words[][SIZE], int *count, char *fn) {
 	return returnCode;
 	
 }
-// 15 char problem somewhere
+
+// This function ensures that a word is formatted properly (length, no bad characters, etc)
 int format_word(char word[]) {
 	int returnCode = 0;
 	int c;
@@ -87,6 +91,7 @@ int format_word(char word[]) {
 	return returnCode;
 }
 
+// This function gets input from a user from the console
 void interactive_input(char words[][SIZE], int *count) {
 	char line[SIZE];
 	int ct = 0;
@@ -108,6 +113,7 @@ void interactive_input(char words[][SIZE], int *count) {
 	*count = ct;
 }
 
+// this function sorts the words
 void sortwords(char words[][SIZE], int count) {
 	int i, j;
 	char temp[SIZE];
@@ -124,6 +130,7 @@ void sortwords(char words[][SIZE], int count) {
 	return;
 }
 
+// this function generates a clue and updates the dataarray to include the word information
 void update(WordData dataArray[], char words[][SIZE], int wordindex, int wordrow, int wordcol, char direction, int *array_index, bool seenword) {
 	strcpy(dataArray[*array_index].word, words[wordindex]);
 	char wrd[SIZE];
@@ -138,6 +145,7 @@ void update(WordData dataArray[], char words[][SIZE], int wordindex, int wordrow
 	(*array_index)++;
 }
 
+// this function places a word on the board
 int placewords(WordData dataArray[], char words[][SIZE], char solution_board[][SIZE], char puzzle_board[][SIZE], int count) {
 	int i = 0, wordrow, wordcol, array_index = 0;
 	// DO FIRST WORD
@@ -184,9 +192,6 @@ int placewords(WordData dataArray[], char words[][SIZE], char solution_board[][S
 		printf("Unable to place word.\n");
 	}
 	// DO REST OF WORDS
-	//
-	// error is that starting coordinates for cactus (down word) are off
-	//
 	for (i = 2; i < count; i++) { // for each word in word array
 		found = false;
 		for (j = 0; j < array_index; j++) { // for each already placed word
@@ -225,7 +230,6 @@ int placewords(WordData dataArray[], char words[][SIZE], char solution_board[][S
 							}
 							found = true;
 							update(dataArray, words, i, wordrow, wordcol, 'D', &array_index, true);
-							printf("%c\n", dataArray[i].dir);
 
 						}
 						if (dataArray[j].dir == 'D') {// new word must go across
@@ -277,6 +281,7 @@ int placewords(WordData dataArray[], char words[][SIZE], char solution_board[][S
 	return array_index;
 }
 
+// This is the second extra credit function that tries to place the word on the board again
 void try_place_again(WordData dataArray[], int array_index, char solution_board[][SIZE], char puzzle_board[][SIZE]) {
 	int i, j, k, l, m, wordrow, wordcol;
 	bool found;
@@ -373,6 +378,7 @@ void try_place_again(WordData dataArray[], int array_index, char solution_board[
 	}
 }
 
+// this function prints the clues to the console
 void showclues(WordData dataArray[], int array_index) {
 	printf("\nClues: \n");
 	printf("Direction |     Anagram     | Location \n");
@@ -392,6 +398,7 @@ void showclues(WordData dataArray[], int array_index) {
 	printf("\n");
 }
 
+// this function writes the clues to a file
 void output_clues(WordData dataArray[], int array_index, FILE *fp) {
 	fputs("\n", fp);
 	fputs("Direction |     Anagram     | Location \n", fp);
@@ -416,6 +423,7 @@ void output_clues(WordData dataArray[], int array_index, FILE *fp) {
 
 }
 
+// this function gets the number of unplaced words
 int unplaced(WordData dataArray[], int array_index) {
 	int i, ct = 0;
 	for (i = 0; i < array_index; i++) {
