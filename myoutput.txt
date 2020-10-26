@@ -38,10 +38,10 @@ X-------------------------------X
 
 
 Direction |     Anagram     | Location 
-Across    |         TOSUCPO | 7, 4 
-Down      |          UTCCAS | 7, 5 
-Down      |          OHNIPE | 6, 8 
-Across    |          LLYOWE | 11, 7 
-Across    |            OCIT | 10, 3 
-Across    |            KATO | 9, 8 
+Across    |         UTSOPCO | 7, 4 
+Down      |          CTACSU | 7, 5 
+Down      |          HOPENI | 6, 8 
+Across    |          LOYLEW | 11, 7 
+Across    |            OTCI | 10, 3 
+Across    |            AKOT | 9, 8 
  
