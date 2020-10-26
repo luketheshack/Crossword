@@ -300,13 +300,13 @@ void try_place_again(WordData dataArray[], int array_index, char solution_board[
 			if ( (i != j) && dataArray[j].seen) { // if the word isn't the word we want to place, and the other word is on the board
 				for (k = 0; k < dataArray[i].len; k++) {
 
-					for (l = 0; l < dataArray[j].len; j++) {
+					for (l = 0; l < dataArray[j].len; l++) {
 					
-					// add system to skip over words
+					// this below is a system to skip over words
 					
 					if ((dataArray[i].word)[k] == (dataArray[j].word)[l]) {
-						//printf("%d %d\n", i, j);
-						//printf("%c %s \n", dataArray[j].dir, dataArray[j].word);	
+						printf("%d %d\n", i, j);
+						printf("%c %s \n", dataArray[j].dir, dataArray[j].word);	
 						int exceptions = 0; // for when checking if word can fit, do not include 
 						bool badcond = false;
 						if (dataArray[j].dir == 'A') {// new word must go down
