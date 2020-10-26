@@ -171,18 +171,23 @@ int placewords(WordData dataArray[], char words[][SIZE], char solution_board[][S
 		for (k = 0; k < dataArray[0].len; k++) { // letter in word its getting crossed with 
 			if (words[1][j] == (dataArray[0].word)[k]) {
 				// place word
-				found = true;
-
+				bool badcond = false;
 				wordrow = dataArray[0].row - j;
 				wordcol = dataArray[0].col + k;
 				
-				for (l = 0; l < strlen(words[1]); l++) {
-					solution_board[wordrow+l][wordcol] = words[1][l];
-					puzzle_board[wordrow+l][wordcol] = ' ';
+				if (wordrow < 0 || wordrow+strlen(words[1]) > SIZE) badcond = true;
+				printf("%c %d\n", words[1][j], wordrow+strlen(words[1]));
+				if (!badcond) {
+
+					found = true;
+					for (l = 0; l < strlen(words[1]); l++) {
+						solution_board[wordrow+l][wordcol] = words[1][l];
+						puzzle_board[wordrow+l][wordcol] = ' ';
+					}
+					// update data array
+					update(dataArray, words, 1, wordrow, wordcol, 'D', &array_index, true); 
+					break;
 				}
-				// update data array
-				update(dataArray, words, 1, wordrow, wordcol, 'D', &array_index, true); 
-				break;
 			}
 		}
 		if (found) break;
@@ -306,11 +311,11 @@ void try_place_again(WordData dataArray[], int array_index, char solution_board[
 						if (dataArray[j].dir == 'A') {// new word must go down
 							wordrow = dataArray[j].row - k;
 							wordcol = dataArray[j].col + l;
-
+							
 							for (m = 0; m < dataArray[i].len; m++) { // should be zero start
 								if ( (wordrow+m < 0) || (wordrow+m >= SIZE) || solution_board[wordrow+m][wordcol] != '.' || solution_board[wordrow+m][wordcol-1] != '.' || solution_board[wordrow+m][wordcol+1] != '.') {
 									if (exceptions == 0 && (wordrow + m >= 0 && wordrow + m < SIZE)) {
-										//printf("%s %d"
+										//printf("Placing: %s CharIntersect: %c Row: %d\n", words[i], words[i][);
 										exceptions++;
 									} else {
 										badcond = true;
