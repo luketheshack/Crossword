@@ -215,7 +215,7 @@ int placewords(WordData dataArray[], char words[][SIZE], char solution_board[][S
 							wordrow = dataArray[j].row - k;
 							wordcol = dataArray[j].col + l;
 							for (m = 0; m < strlen(words[i]); m++) { // should be zero start
-								if ( (wordrow+m < 0) || (wordrow+m >= SIZE) || solution_board[wordrow+m][wordcol] != '.' || solution_board[wordrow+m][wordcol-1] != '.' || solution_board[wordrow+m][wordcol+1] != '.') {
+								if ( (wordrow+m < 0) || (wordrow+m > SIZE) || solution_board[wordrow+m][wordcol] != '.' || solution_board[wordrow+m][wordcol-1] != '.' || solution_board[wordrow+m][wordcol+1] != '.') {
 									if (exceptions == 0 && (wordrow + m >= 0 && wordrow + m < SIZE)) {
 										exceptions++;
 									} else {
@@ -242,7 +242,7 @@ int placewords(WordData dataArray[], char words[][SIZE], char solution_board[][S
 							wordrow = dataArray[j].row + l;
 							wordcol = dataArray[j].col - k; // -k
 							for (m = 0; m < strlen(words[i]); m++) { // should be zero start
-								if ( (wordcol+m < 0) || (wordcol+m >= SIZE) || solution_board[wordrow][wordcol+m] != '.' || solution_board[wordrow+1][wordcol+m] != '.' || solution_board[wordrow-1][wordcol+m] != '.') {
+								if ( (wordcol+m < 0) || (wordcol+m > SIZE) || solution_board[wordrow][wordcol+m] != '.' || solution_board[wordrow+1][wordcol+m] != '.' || solution_board[wordrow-1][wordcol+m] != '.') {
 									
 									if (exceptions == 0 && (wordcol + m >= 0 && wordcol + m < SIZE)) {
 										exceptions++;
@@ -313,7 +313,7 @@ void try_place_again(WordData dataArray[], int array_index, char solution_board[
 							wordcol = dataArray[j].col + l;
 							
 							for (m = 0; m < dataArray[i].len; m++) { // should be zero start
-								if ( (wordrow+m < 0) || (wordrow+m >= SIZE) || solution_board[wordrow+m][wordcol] != '.' || solution_board[wordrow+m][wordcol-1] != '.' || solution_board[wordrow+m][wordcol+1] != '.') {
+								if ( (wordrow+m < 0) || (wordrow+m > SIZE) || solution_board[wordrow+m][wordcol] != '.' || solution_board[wordrow+m][wordcol-1] != '.' || solution_board[wordrow+m][wordcol+1] != '.') {
 									if (exceptions == 0 && (wordrow + m >= 0 && wordrow + m < SIZE)) {
 										//printf("Placing: %s CharIntersect: %c Row: %d\n", words[i], words[i][);
 										exceptions++;
@@ -341,7 +341,7 @@ void try_place_again(WordData dataArray[], int array_index, char solution_board[
 							wordrow = dataArray[j].row + l;
 							wordcol = dataArray[j].col - k; // -k
 							for (m = 0; m < dataArray[i].len; m++) { // should be zero start
-								if ( (wordcol+m < 0) || (wordcol+m >= SIZE) || solution_board[wordrow][wordcol+m] != '.' || solution_board[wordrow+1][wordcol+m] != '.' || solution_board[wordrow-1][wordcol+m] != '.') {
+								if ( (wordcol+m < 0) || (wordcol+m > SIZE) || solution_board[wordrow][wordcol+m] != '.' || solution_board[wordrow+1][wordcol+m] != '.' || solution_board[wordrow-1][wordcol+m] != '.') {
 									
 									if (exceptions == 0 && (wordcol + m >= 0 && wordcol + m < SIZE)) {
 										exceptions++;
