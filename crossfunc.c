@@ -226,16 +226,17 @@ int placewords(WordData dataArray[], char words[][SIZE], char solution_board[][S
 							} 
 							if (wordrow+m <= SIZE && solution_board[wordrow+m][wordcol] != '.') badcond = true; 
 							if (wordrow != 0 && solution_board[wordrow-1][wordcol] != '.') badcond = true;
-							if (badcond) break;
+							if (!badcond) {
 							
-							//printf("%s : %c\n", dataArray[j].word, words[i][k]);
-							// if we make it here, then word will fit nicely on board
-							for (m = 0; m < strlen(words[i]); m++) {
-								solution_board[wordrow+m][wordcol] = words[i][m];
-								puzzle_board[wordrow+m][wordcol] = ' ';
+								//printf("%s : %c\n", dataArray[j].word, words[i][k]);
+								// if we make it here, then word will fit nicely on board
+								for (m = 0; m < strlen(words[i]); m++) {
+									solution_board[wordrow+m][wordcol] = words[i][m];
+									puzzle_board[wordrow+m][wordcol] = ' ';
+								}
+								found = true;
+								update(dataArray, words, i, wordrow, wordcol, 'D', &array_index, true);
 							}
-							found = true;
-							update(dataArray, words, i, wordrow, wordcol, 'D', &array_index, true);
 
 						}
 						if (dataArray[j].dir == 'D') {// new word must go across
@@ -255,19 +256,19 @@ int placewords(WordData dataArray[], char words[][SIZE], char solution_board[][S
 							}
 							if (wordcol+m <= SIZE && solution_board[wordrow][wordcol+m] != '.') badcond = true;
 							if (wordcol != 0 && solution_board[wordrow][wordcol-1] != '.') badcond = true;
-							if (badcond) break;
+							if (!badcond) {
 
 							// if we make it here, word fits on board
-							//printf("%s : %c\n", dataArray[j].word, words[i][k]);
-							for (m = 0; m < strlen(words[i]); m++) {
-
-								solution_board[wordrow][wordcol+m] = words[i][m];
-								puzzle_board[wordrow][wordcol+m] = ' ';
+								//printf("%s : %c\n", dataArray[j].word, words[i][k]);
+								for (m = 0; m < strlen(words[i]); m++) {
+	
+									solution_board[wordrow][wordcol+m] = words[i][m];
+									puzzle_board[wordrow][wordcol+m] = ' ';
+								}
+								found = true;
+	
+								update(dataArray, words, i, wordrow, wordcol, 'A', &array_index, true);
 							}
-							printf("\n");
-							found = true;
-
-							update(dataArray, words, i, wordrow, wordcol, 'A', &array_index, true);
 
 						}
 						if (found) break;
@@ -297,7 +298,6 @@ void try_place_again(WordData dataArray[], int array_index, char solution_board[
 		if (!dataArray[i].seen) { // if the word hasn't been placed yet
 			
 		for (j = 0; j < array_index; j++) { // for each word in the dataArray
-			printf("%d %d\n", i, j);	
 			if ( (i != j) && dataArray[j].seen) { // if the word isn't the word we want to place, and the other word is on the board
 				for (k = 0; k < dataArray[i].len; k++) {
 
@@ -327,18 +327,19 @@ void try_place_again(WordData dataArray[], int array_index, char solution_board[
 							} 
 							if (wordrow+m <= SIZE && solution_board[wordrow+m][wordcol] != '.') badcond = true; 
 							if (wordrow != 0 && solution_board[wordrow-1][wordcol] != '.') badcond = true;
-							if (badcond) break;
+							if (!badcond) {
 
 							// if we make it here, then word will fit nicely on board
-							for (m = 0; m < dataArray[i].len; m++) {
-								solution_board[wordrow+m][wordcol] = (dataArray[i].word)[m];
-								puzzle_board[wordrow+m][wordcol] = ' ';
+								for (m = 0; m < dataArray[i].len; m++) {
+									solution_board[wordrow+m][wordcol] = (dataArray[i].word)[m];
+									puzzle_board[wordrow+m][wordcol] = ' ';
+								}
+								found = true;
+								dataArray[i].seen = true;
+								dataArray[i].row = wordrow;
+								dataArray[i].col = wordcol;
+								dataArray[i].dir = 'D';
 							}
-							found = true;
-							dataArray[i].seen = true;
-							dataArray[i].row = wordrow;
-							dataArray[i].col = wordcol;
-							dataArray[i].dir = 'D';
 						}
 						if (dataArray[j].dir == 'D') {// new word must go across
 							wordrow = dataArray[j].row + l;
@@ -356,21 +357,21 @@ void try_place_again(WordData dataArray[], int array_index, char solution_board[
 							}
 							if (wordcol+m <= SIZE && solution_board[wordrow][wordcol+m] != '.') badcond = true;
 							if (wordcol != 0 && solution_board[wordrow][wordcol-1] != '.') badcond = true;
-							if (badcond) break;
+							if (!badcond) {
 
 							// if we make it here, word fits on board
-							for (m = 0; m < dataArray[i].len; m++) {
+								for (m = 0; m < dataArray[i].len; m++) {
 
-								solution_board[wordrow][wordcol+m] = (dataArray[i].word)[m];
-								puzzle_board[wordrow][wordcol+m] = ' ';
+									solution_board[wordrow][wordcol+m] = (dataArray[i].word)[m];
+									puzzle_board[wordrow][wordcol+m] = ' ';
+								}
+								found = true;
+	
+								dataArray[i].seen = true;
+								dataArray[i].row = wordrow;
+								dataArray[i].col = wordcol;
+								dataArray[i].dir = 'A';
 							}
-							printf("\n");
-							found = true;
-
-							dataArray[i].seen = true;
-							dataArray[i].row = wordrow;
-							dataArray[i].col = wordcol;
-							dataArray[i].dir = 'A';
 						}
 					}
 					if (found) {
