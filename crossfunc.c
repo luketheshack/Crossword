@@ -196,6 +196,7 @@ int placewords(WordData dataArray[], char words[][SIZE], char solution_board[][S
 		printf("Unable to place word.\n");
 	}
 	// DO REST OF WORDS
+	
 	for (i = 2; i < count; i++) { // for each word in word array
 		found = false;
 		for (j = 0; j < array_index; j++) { // for each already placed word
@@ -284,11 +285,12 @@ int placewords(WordData dataArray[], char words[][SIZE], char solution_board[][S
 			printf("Cannot place word \"%s\" on first pass.\n", words[i]);
 			update(dataArray, words, i, -100, -100, 'N', &array_index, false); // N stands for neither, -100 coordinates so that it doesn't interfere with board
 		}
+		// note that if the word cannot be placed at the moment, then the word is skipped over, and the program attempts to place the rest of the words. (1st extra credit)
 	}
 	return array_index;
 }
 
-// This is the second extra credit function that tries to place the word on the board again
+// This is the second extra credit function that tries to place the word on the board again (second extra credit)
 void try_place_again(WordData dataArray[], int array_index, char solution_board[][SIZE], char puzzle_board[][SIZE]) {
 	int i, j, k, l, m, wordrow, wordcol;
 	bool found;
@@ -305,8 +307,6 @@ void try_place_again(WordData dataArray[], int array_index, char solution_board[
 					// this below is a system to skip over words
 					
 					if ((dataArray[i].word)[k] == (dataArray[j].word)[l]) {
-						printf("%d %d\n", i, j);
-						printf("%c %s \n", dataArray[j].dir, dataArray[j].word);	
 						int exceptions = 0; // for when checking if word can fit, do not include 
 						bool badcond = false;
 						if (dataArray[j].dir == 'A') {// new word must go down

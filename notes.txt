@@ -1,4 +1,0 @@
-Last things to do:
-
-make it actually try again to place word
-generate clue in update might need its own function, maybe make it separate so when we dont use update function it will do its own clue making thing so i dont have to change the update function
